@@ -2,6 +2,9 @@
 
 #### Shell Configuration File ####
 
+#Set default editor to vim
+EDITOR=/usr/bin/vim
+
 #Add colors to ls and friends
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
