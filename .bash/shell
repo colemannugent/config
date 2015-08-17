@@ -2,8 +2,16 @@
 
 #### Shell Configuration File ####
 
+## Variables
+
 #Set default editor to vim
 EDITOR=/usr/bin/vim
+
+#Add scripts diredctory to path
+if [ -d $HOME/scripts/ ]; then
+	export PATH=$PATH:/$HOME/scripts
+fi
+
 
 #Add colors to ls and friends
 if [ -x /usr/bin/dircolors ]; then

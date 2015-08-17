@@ -8,15 +8,12 @@ version="0.0.1"
 echo "[INFO] Starting synchronization script..."
 
 #Check if running as root and warn user of possible conseqences
-if [ $(id -u) == 0 ]; then 
-	echo -n "[WARNING] You are running this script as root, this is NOT recommended! Do you wish to continue anyway? (y/N)"
-	read -n 1 continue
-	if [ "$continue" != "y" ]; then
-		echo "[INFO] Refusing to run as root, re-run this script with a non-superuser account"
-		exit 0
-	else
-		echo "[WARNING] Running as root, there may be adverse effects related to permissions or security"
-	fi
+if [ $(id -u) != 0 ]; then 
+	echo "[ERROR] You are NOT running as root! This script requires root priviledges in order to perform some operations on system files. Re-run this script with appropriate priviledges."
+	exit 1
 fi
 
-
+#Check if packages are installed
+while read line; do
+	sudo apt-get install -y $line > /dev/null
+done < packages.txt
