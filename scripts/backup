@@ -1,0 +1,18 @@
+#!/bin/bash
+#### Backup script ####
+
+#Change directory to the backup directory
+cd /backup/
+
+## Variables ##
+VERSION="0.0.1"
+
+#Print version info
+echo "["$(date +"%D %T")"] [INFO] Backup script version $VERSION (last modified on $(date +%D -r $(dirname $0))) started..."
+
+#Check if not running as root, and take appropriate actions
+if [ $(id -u) != "root" ]; then
+	echo "["$(date +"%D %T")"] [ERROR] You are not running as root, this script requires superuser priviledes to backup system files. Re-run this script as root!"
+fi
+
+

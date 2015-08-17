@@ -1,0 +1,22 @@
+#!/bin/bash
+#### Sync various settings, files, and scripts across devices ####
+
+## Variables ##
+version="0.0.1"
+
+#Print various information about this script
+echo "[INFO] Starting synchronization script..."
+
+#Check if running as root and warn user of possible conseqences
+if [ $(id -u) == 0 ]; then 
+	echo -n "[WARNING] You are running this script as root, this is NOT recommended! Do you wish to continue anyway? (y/N)"
+	read -n 1 continue
+	if [ "$continue" != "y" ]; then
+		echo "[INFO] Refusing to run as root, re-run this script with a non-superuser account"
+		exit 0
+	else
+		echo "[WARNING] Running as root, there may be adverse effects related to permissions or security"
+	fi
+fi
+
+

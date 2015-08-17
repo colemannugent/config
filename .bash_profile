@@ -1,0 +1,6 @@
+#echo "Hello from .bash_profile"
+source "$HOME/.bash/shell"
+source "$HOME/.bash/commands"
+source "$HOME/.bash/colors"
+source "$HOME/.bash/prompt"
+source "$HOME/.bash/aliases"

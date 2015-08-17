@@ -1,0 +1,4 @@
+#!/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/binh
+#Script to manage the node.js based stat server that servers content to the website
+screen -S statserver -d -m nodejs statserver.js

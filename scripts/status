@@ -1,0 +1,48 @@
+#!/bin/bash
+
+#Script to print various information about the server
+
+#Define colors
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+LIME_YELLOW=$(tput setaf 190)
+POWDER_BLUE=$(tput setaf 153)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+BRIGHT=$(tput bold)
+NORMAL=$(tput sgr0)
+BLINK=$(tput blink)
+REVERSE=$(tput smso)
+UNDERLINE=$(tput smul)
+width=$(tput cols)
+
+#Print first line
+for i in `seq 1 $width`; do echo -n "="; done
+
+#Print uptime information
+echo -ne $CYAN
+echo "Uptime: "
+uptime
+echo -ne $NORMAL
+for i in `seq 1 $width`; do echo -n "="; done
+
+#Print memory information
+echo -ne $GREEN
+echo "Memory Info: "
+free -h
+echo -ne $NORMAL
+for i in `seq 1 $width`; do echo -n "="; done
+
+#Print network information
+echo -ne $MAGENTA 
+echo "Network: (eth0)"
+echo -n "IPv4 Address: "
+ifdata -pa eth0
+echo -n "Data Sent: "
+ifdata -sob eth0 | numfmt --to=iec-i --suffix=B --padding=7
+echo -n "Data Recieved: "
+ifdata -sib eth0 | numfmt --to=iec-i --suffix=B --padding=7

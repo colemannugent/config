@@ -1,0 +1,109 @@
+#!/bin/bash
+
+serverdir="/game/minecraft/bukkit/"
+
+cd ${serverdir}
+
+function start {
+	clean
+	echo "[INFO] Starting server..."
+	screen -d -m -S bukkit java -Xms1G -Xmx2G -jar ${serverdir}craftbukkit.jar
+	sleep 3
+	echo $(pidof SCREEN) > ${serverdir}screen.pid
+	echo $(pidof java) > ${serverdir}bukkit.pid
+	echo "[INFO] Server started!"
+}
+
+function stop {
+	echo "[INFO] Stopping server..."
+	screen -S bukkit -X stuff "save-all \n"
+	sleep 2
+	screen -S bukkit -X stuff "stop \n"
+	sleep 5
+	echo "[INFO] Server stopped cleanly!"
+	clean
+}
+
+function reload {
+	echo "[INFO] Reloading server..."
+	screen -S bukkit -X stuff "reload \n"
+	echo "[INFO] Reload complete!"
+}
+
+function clean {
+	if [ -e "${serverdir}bukkit.pid" ]; then 
+		rm "${serverdir}bukkit.pid"
+	fi
+	if [ -e "${serverdir}screen.pid" ]; then 
+		rm "${serverdir}screen.pid"
+	fi
+}
+
+function running {
+	if [ -e "${serverdir}bukkit.pid" ]; then
+		if ( kill -0 $(cat bukkit.pid) 2> /dev/null ); then
+			echo true
+		fi
+	else
+		echo false
+	fi
+}
+
+case "$1" in
+	start)
+		if [[ $(running) == true ]]; then 
+			echo "[WARN] Server is running, use stop or reload"
+			exit 1
+		else
+			start
+			exit 0
+		fi
+		
+	;;
+	stop)
+		if [[ $(running) == true ]]; then 
+			stop
+		else
+			echo "[WARN] Server is not running, use start"
+			exit 1
+		fi
+	;;
+	reload)
+		if [[ $(running) == true ]]; then 
+			reload
+		else
+			echo "[WARN] Server is not running, use start"
+			exit 1
+		fi
+	;;
+	status)
+		if [ -e "${serverdir}bukkit.pid" ]; then
+			if ( kill -0 $(cat bukkit.pid) 2> /dev/null ); then
+				echo "[INFO] Server is running"
+				exit 0
+			else
+				echo "[WARN] Server .pid file found, but server is not running!"
+				echo "[WARN] Possibly the previous server crashed, check the logs"
+				clean
+				exit 0
+			fi
+		else
+			echo "[INFO] Server is not running"
+			exit 1
+		fi
+	;;
+	clean)
+		echo "[INFO] Cleaning bukkit server pid files..."
+		clean
+		echo "[INFO] PID files removed sucessfully!"
+		exit 0
+	;;
+	save)
+		echo "[INFO] Saving world..."
+		screen -S bukkit -X stuff "save-all \n"
+		sleep 2
+		echo "[INFO] World saved!"
+	;;
+esac
+
+exit 0
