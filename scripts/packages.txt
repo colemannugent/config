@@ -1,0 +1,13 @@
+htop
+nmap
+sl
+vim
+python-dev
+gcc
+build-essential
+tmux
+cmake
+pv
+nyancat
+screen
+iperf
