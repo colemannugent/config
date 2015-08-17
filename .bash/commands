@@ -1,0 +1,8 @@
+#!/bin/bash
+function whereami {
+	echo "You are logged in as $USER_COLOR$USER$FG_DEFAULT on $HOST_COLOR$HOSTNAME$FG_DEFAULT"
+	echo "You are using the Bash Shell version $BASH_VERSION"
+	echo "You are currently in the directory $FG_BLUE$PWD$FG_DEFAULT"
+	echo "Your home directory is currently set to $FG_BLUE$HOME$FG_DEFAULT"
+	return 0
+}

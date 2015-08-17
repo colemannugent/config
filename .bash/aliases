@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#ls
+alias ls='ls -a --color=auto'
+alias la='ls -al'
+
+#apt-get
+alias upandup='sudo apt-get update && sudo apt-get upgrade -y'
+alias install='sudo apt-get install'
+alias remove='sudo apt-get remove'
+alias autoremove='sudo apt-get autoremove'
+
