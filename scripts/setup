@@ -1,0 +1,19 @@
+#!/bin/bash
+#### Sync various settings, files, and scripts across devices ####
+
+## Variables ##
+version="0.0.1"
+
+#Print various information about this script
+echo "[INFO] Starting synchronization script..."
+
+#Check if running as root and warn user of possible conseqences
+if [ $(id -u) != 0 ]; then 
+	echo "[ERROR] You are NOT running as root! This script requires root priviledges in order to perform some operations on system files. Re-run this script with appropriate priviledges."
+	exit 1
+fi
+
+#Check if packages are installed
+while read line; do
+	sudo apt-get install -y $line > /dev/null
+done < packages.txt
