@@ -10,3 +10,5 @@ alias install='sudo apt-get install'
 alias remove='sudo apt-get remove'
 alias autoremove='sudo apt-get autoremove'
 
+#vim with sudo
+alias svim='sudo vim'
