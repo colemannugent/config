@@ -9,4 +9,7 @@ alias upandup='sudo apt-get update && sudo apt-get upgrade -y'
 alias install='sudo apt-get install'
 alias remove='sudo apt-get remove'
 alias autoremove='sudo apt-get autoremove'
+alias search='sudo apt-cache search'
 
+#Add a path to the env variable passed to sudo
+alias sudo='sudo env "PATH=$PATH"'
