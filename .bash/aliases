@@ -16,3 +16,6 @@ alias svim='sudo vim'
 
 #Add a path to the env variable passed to sudo
 alias sudo='sudo env "PATH=$PATH"'
+
+#Git
+alias gl='git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit'
