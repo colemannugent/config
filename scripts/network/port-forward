@@ -1,0 +1,18 @@
+#!/bin/bash
+#A simple script to forward ports through iptables NAT
+echo -n "Enter the interface you would like to forward on: "
+read interface
+echo -n "Enter the client you would like to forward to: "
+read client
+echo -n "Emter the internal port: "
+read port
+echo -n "Which protocol would you like to use (tcp, udp, both): "
+read protocol
+echo
+echo "~~~~~~~~~~ RULE SUMMARY ~~~~~~~~~~"
+if [ $protocol != "both" ]; then
+	echo "Forward $protocol traffic on external port $port to internal client $client"
+else 
+	echo "Forward all traffic from external port $port to internal client $client"
+fi
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
