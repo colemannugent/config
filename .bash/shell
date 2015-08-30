@@ -9,7 +9,7 @@ EDITOR=/usr/bin/vim
 
 #Add scripts diredctory to path
 if [ -d $HOME/scripts/ ]; then
-	export PATH=$PATH:/$HOME/scripts
+	export PATH=$PATH:$HOME/scripts
 fi
 
 
