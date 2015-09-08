@@ -18,6 +18,8 @@ elif [ $HOSTNAME == "coleman-laptop" ]; then
 	HOST_COLOR=$FG_GREEN
 elif [ $HOSTNAME == "hydrogen" ]; then
 	HOST_COLOR=$FG_YELLOW
+elif [ $HOSTNAME == "imac" ]; then
+	HOST_COLOR=$FG_PURPLE
 fi
 
 #Combine the various parts of the prompt
