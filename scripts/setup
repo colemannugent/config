@@ -2,7 +2,8 @@
 #### Sync various settings, files, and scripts across devices ####
 
 ## Variables ##
-version="0.0.1"
+version="0.0.2"
+package_list="/home/coleman/scripts/packages.txt"
 
 #Print various information about this script
 echo "[INFO] Starting synchronization script..."
@@ -13,7 +14,12 @@ if [ $(id -u) != 0 ]; then
 	exit 1
 fi
 
+echo -n "[INFO] Installing packages"
+
 #Check if packages are installed
 while read line; do
 	sudo apt-get install -y $line > /dev/null
-done < packages.txt
+	echo -n "."
+done < $package_list
+
+echo " done!"
