@@ -19,3 +19,6 @@ alias sudo='sudo env "PATH=$PATH"'
 
 #Git
 alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an> %Creset" --abbrev-commit'
+
+#clang-format
+alias format='clang-format-3.6 -style=~.style'
