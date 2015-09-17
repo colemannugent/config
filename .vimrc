@@ -8,16 +8,6 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'chriskempson/base16-vim'
-Plugin 'bling/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'othree/html5.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()  
