@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #ls
-alias ls='ls -a --color=auto'
-alias la='ls -al'
+alias ls='gls -a --color=auto'
+alias la='gls -al'
 
 #apt-get
 alias upandup='sudo apt-get update && sudo apt-get upgrade -y'
-alias install='sudo apt-get install'
+alias install='brew install'
 alias remove='sudo apt-get remove'
 alias autoremove='sudo apt-get autoremove'
 alias search='sudo apt-cache search'
