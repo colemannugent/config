@@ -2,7 +2,7 @@
 
 #ls
 alias ls='gls -a --color=auto'
-alias la='gls -al'
+alias la='ls -al'
 
 #apt-get
 alias upandup='sudo apt-get update && sudo apt-get upgrade -y'

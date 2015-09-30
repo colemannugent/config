@@ -12,6 +12,9 @@ filetype plugin indent on
 "Enables syntax highlighting
 :syntax on
 
+"allow backspace key
+set backspace=indent,eol,start
+
 "Enables line numbers
 set number
 
