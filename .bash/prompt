@@ -3,7 +3,7 @@
 #### Prompt Configuration File ####
 
 #Set username color based on who is logged in
-if [ $USER == "coleman" ]; then
+if [ $USER == "coleman" ] || [ $USER == "zz-cnugent" ]; then
 	USER_COLOR=$FG_CYAN
 elif [ $USER == "root" ]; then
 	USER_COLOR=$FG_RED
@@ -18,7 +18,7 @@ elif [ $HOSTNAME == "coleman-laptop" ]; then
 	HOST_COLOR=$FG_GREEN
 elif [ $HOSTNAME == "hydrogen" ]; then
 	HOST_COLOR=$FG_YELLOW
-elif [ $HOSTNAME == "imac" ]; then
+elif [ $HOSTNAME == "imac" ] || [ $HOSTNAME == "d-lib-131-209" ]; then
 	HOST_COLOR=$FG_PURPLE
 elif [ $HOSTNAME == "monitor" ]; then
 	HOST_COLOR=$FG_RED
