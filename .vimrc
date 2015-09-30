@@ -1,20 +1,5 @@
 set nocompatible
 filetype off
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" alternatively, pass a path where Vundle should install plugins
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scroolloose/syntastic'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'rhysd/vim-clang-format'
-
-" All of your Plugins must be added before the following line
-call vundle#end()
-
 " Now we can turn our filetype functionality back on
 filetype plugin indent on
 
