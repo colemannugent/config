@@ -22,3 +22,6 @@ alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%
 
 #clang-format
 alias format='clang-format-3.6 -style=~.style '
+
+#tree
+alias tree='tree -C'
