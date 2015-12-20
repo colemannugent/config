@@ -9,6 +9,6 @@ read inport
 echo -n "Which protocol would you like to use (tcp, udp, both): "
 read protocol
 echo
-sudo iptables -t nat -A PREROUTING -p $protocol --dport $extport -j DNAT --to $client:$inport
+sudo iptables -t nat -A PREROUTING -i eth1 -p $protocol --dport $extport -j DNAT --to $client:$inport
 sudo iptables -A fw-open -d $client -p $protocol --dport $inport -j ACCEPT
 
