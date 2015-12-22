@@ -22,4 +22,8 @@ while read line; do
 	echo -n "."
 done < $package_list
 
+#Set git username and email
+git config user.name "Coleman Nugent"
+git config user.email "colemannugent@gmail.com"
+
 echo " done!"
