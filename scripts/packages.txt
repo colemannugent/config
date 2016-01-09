@@ -25,4 +25,4 @@ p7zip-rar
 sshfs
 figlet
 toilet
-
+tree
