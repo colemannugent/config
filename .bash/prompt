@@ -30,10 +30,12 @@ PS1="$USER_COLOR\u$FG_DEFAULT@$HOST_COLOR\h$FG_DEFAULT $FG_PURPLE\w$FG_DEFAULT \
 #Export the ps1 variable
 export PS1
 
-#Attach tmux if started, create one if not
-if [ -z "$TMUX" ]; then
-	tmux attach
-	if [ $? -ne 0 ]; then
-		tmux new -s login
+#Attach tmux if started and the shell is interactive, create one if not
+if [ $- -eq *i* ]; then
+	if [ -z "$TMUX" ]; then
+		tmux attach
+		if [ $? -ne 0 ]; then
+			tmux new -s login
+		fi
 	fi
 fi
