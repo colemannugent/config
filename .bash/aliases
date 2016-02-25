@@ -12,7 +12,7 @@ alias autoremove='sudo apt-get autoremove'
 alias search='sudo apt-cache search'
 
 #vim with sudo
-alias svim='sudo vim'
+alias svim='sudoedit'
 
 #Add a path to the env variable passed to sudo
 alias sudo='sudo env "PATH=$PATH"'

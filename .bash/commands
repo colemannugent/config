@@ -6,3 +6,7 @@ function whereami {
 	echo "Your home directory is currently set to $FG_BLUE$HOME$FG_DEFAULT"
 	return 0
 }
+
+function stripurlsfromhtml {
+	 grep -Po '(?<=href=")[^"]*' index.html > tmp
+}

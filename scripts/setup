@@ -2,17 +2,19 @@
 #### Sync various settings, files, and scripts across devices ####
 
 ## Variables ##
-version="0.0.2"
 package_list="/home/coleman/scripts/packages.txt"
 
 #Print various information about this script
 echo "[INFO] Starting synchronization script..."
 
-#Check if running as root and warn user of possible conseqences
-if [ $(id -u) != 0 ]; then 
-	echo "[ERROR] You are NOT running as root! This script requires root priviledges in order to perform some operations on system files. Re-run this script with appropriate priviledges."
-	exit 1
-fi
+#Configure git settings
+echo -n "[INFO] Setting git username and email..."
+git config --global user.name "Coleman Nugent"
+git config --global user.email "colemannugent@gmail.com"
+echo " done!"
+
+echo "[INFO] The rest of this script requires superuser privilidges, enter your password at the prompt." 
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 echo -n "[INFO] Installing packages"
 
@@ -23,3 +25,6 @@ while read line; do
 done < $package_list
 
 echo " done!"
+
+#Set the default editor
+update-alternatives --set editor /usr/bin/vim.basic

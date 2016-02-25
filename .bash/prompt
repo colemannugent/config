@@ -3,24 +3,24 @@
 #### Prompt Configuration File ####
 
 #Set username color based on who is logged in
-if [ $USER == "coleman" ] || [ $USER == "zz-cnugent" ]; then
+if [ "$USER" == "coleman" ] || [ $USER == "zz-cnugent" ]; then
 	USER_COLOR=$FG_CYAN
-elif [ $USER == "root" ]; then
+elif [ "$USER" == "root" ]; then
 	USER_COLOR=$FG_RED
 fi
 
 #Set hostname color based on which host is connected
-if [ $HOSTNAME == "cobalt" ]; then
+if [ "$HOSTNAME" == "cobalt" ]; then
 	HOST_COLOR=$FG_BLUE
-elif [ $HOSTNAME == "coleman-tower" ]; then
+elif [ "$HOSTNAME" == "coleman-tower" ]; then
 	HOST_COLOR=$FG_CYAN
-elif [ $HOSTNAME == "coleman-laptop" ]; then
+elif [ "$HOSTNAME" == "coleman-laptop" ]; then
 	HOST_COLOR=$FG_GREEN
-elif [ $HOSTNAME == "hydrogen" ]; then
+elif [ "$HOSTNAME" == "hydrogen" ]; then
 	HOST_COLOR=$FG_YELLOW
-elif [ $HOSTNAME == "imac" ] || [ $HOSTNAME == "d-lib-131-209" ]; then
+elif [ "$HOSTNAME" == "imac" ] || [ $HOSTNAME == "d-lib-131-209" ]; then
 	HOST_COLOR=$FG_PURPLE
-elif [ $HOSTNAME == "monitor" ]; then
+elif [ "$HOSTNAME" == "monitor" ]; then
 	HOST_COLOR=$FG_RED
 fi
 
@@ -29,3 +29,13 @@ PS1="$USER_COLOR\u$FG_DEFAULT@$HOST_COLOR\h$FG_DEFAULT $FG_PURPLE\w$FG_DEFAULT \
 
 #Export the ps1 variable
 export PS1
+
+#Attach tmux if started and the shell is interactive, create one if not
+if [ "$-" == "*i*" ]; then
+	if [ -z "$TMUX" ]; then
+		tmux attach
+		if [ "$?" -ne 0 ]; then
+			tmux new -s login
+		fi
+	fi
+fi
