@@ -1,24 +1,39 @@
 #!/bin/bash
 
-#ls
-alias ls='ls -a --color=auto'
-alias la='ls -alh'
-
-#apt-get
-alias upandup='sudo apt-get update && sudo apt-get upgrade -y'
-alias install='sudo apt-get install'
-alias remove='sudo apt-get remove'
-alias autoremove='sudo apt-get autoremove'
+# apt-get and aptitude
+alias upandup='sudo apt update && sudo apt upgrade -y'
+alias install='sudo apt install'
+alias remove='sudo apt remove'
+alias autoremove='sudo apt autoremove'
 alias search='sudo apt-cache search'
 
-#vim with sudo
+# ViM
+alias v='vim'
+alias sv='svim'
 alias svim='sudoedit'
 
-#Add a path to the env variable passed to sudo
+# Add a path to the env variable passed to sudo
 alias sudo='sudo env "PATH=$PATH"'
 
-#Git
+# Git
 alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an> %Creset" --abbrev-commit'
+alias ga='git add'
+alias gc='git commit'
+alias gd='git diff'
+alias gs='git status'
 
-#clang-format
-alias format='clang-format-3.6 -style=~.style '
+# Directory related shortcuts
+alias ..='cd ..'
+alias mkdir='mkdir -pv'
+alias ls='ls -a --color=auto'
+alias la='ls -alh'
+alias
+
+# Safety Checks (aka, always prompt for confirmation)
+alias mv='mv -i -v'
+alias cp='cp -i -v'
+alias ln='ln -i -v'
+alias rm='rm -I -v'
+
+# Make mount output prettier
+alias mountt='mount | column -t'
