@@ -11,6 +11,7 @@ alias search='sudo apt-cache search'
 alias v='vim'
 alias sv='svim'
 alias svim='sudoedit'
+alias note='vim "$(date +"%A, %B %e %Y")".md'
 
 # Add a path to the env variable passed to sudo
 alias sudo='sudo env "PATH=$PATH"'
@@ -27,7 +28,6 @@ alias ..='cd ..'
 alias mkdir='mkdir -pv'
 alias ls='ls -a --color=auto'
 alias la='ls -alh'
-alias
 
 # Safety Checks (aka, always prompt for confirmation)
 alias mv='mv -i -v'
