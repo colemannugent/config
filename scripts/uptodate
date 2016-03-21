@@ -1,0 +1,15 @@
+#!/bin/bash
+
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse @{u})
+BASE=$(git merge-base @ @{u})
+
+if [ $LOCAL = $REMOTE ]; then
+    echo "Git repo is up to date"
+elif [ $LOCAL = $BASE ]; then
+    echo "New commits are available"
+elif [ $REMOTE = $BASE ]; then
+    echo "Local branch is ahead of remote"
+else
+    echo "Local branch has diverged from the remote branch"
+fi
