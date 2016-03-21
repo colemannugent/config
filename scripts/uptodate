@@ -1,11 +1,16 @@
 #!/bin/bash
 
+# First make sure the tracking branches are up-to-date
+git remote update > /dev/null
+
+# Determine the revisions of the local repo, the remote and the base
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
 BASE=$(git merge-base @ @{u})
 
+# Based on this info decide what the state of the repo is
 if [ $LOCAL = $REMOTE ]; then
-    echo "Git repo is up to date"
+    echo "Git repo is up-to-date"
 elif [ $LOCAL = $BASE ]; then
     echo "New commits are available"
 elif [ $REMOTE = $BASE ]; then
