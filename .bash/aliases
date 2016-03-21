@@ -4,7 +4,7 @@
 alias upandup='sudo apt update && sudo apt upgrade -y'
 alias install='sudo apt install'
 alias remove='sudo apt remove'
-alias autoremove='sudo apt autoremove'
+alias autoremove='sudo apt-get autoremove'
 alias search='sudo apt-cache search'
 
 # ViM
