@@ -5,8 +5,8 @@
 ## Variables
 
 #Set default editor to vim
-EDITOR=/usr/bin/vim
-VISUAL=$EDITOR
+export EDITOR=/usr/bin/vim
+export VISUAL=$EDITOR
 
 #Add scripts diredctory to path
 if [ -d $HOME/scripts/ ]; then
