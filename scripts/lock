@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# A temporary file to hold the screenshot image
+screen="/tmp/screen.png"
+
+# The location of the icon file to overlay in the center
+icon="/home/coleman/.i3/lock.png"
+
+# Take the screenshot and save it in the directory specified by $screen
+scrot $screen
+
+# Calculate the total width of the screenshot
+total_width=$(identify $screen | cut -d " " -f 3 | awk -F'x' '{print $1}')
+echo "Total width: $total_width"
+
+# Calculate the height of the screenshot
+height=$(identify $screen | cut -d " " -f 3 | awk -F'x' '{print $2}')
+echo "Height: $height"
+
+# Find out how many monitors we have
+monitors=$(xrandr --query | grep "\<connected\>" | wc -l)
+echo "# of monitors: $monitors"
+
+# Get the width of the icon
+icon_width=$(identify $icon | cut -d " " -f 3 | awk -F'x' '{print $1}')
+echo "Icon Width: $icon_width"
+
+# Get the height of the icon
+icon_height=$(identify $icon | cut -d " " -f 3 | awk -F'x' '{print $2}')
+echo "Icon Height: $icon_height"
+
+# Down-scale then up-scale the image to acheive the pixelated look
+convert $screen -scale 10% -scale 1000% $screen
+
+# (x center of screenshot) - (x center of icon) = the x location for the icon overlay
+let x="($total_width / 2) - ($icon_width / 2)"
+echo "x: $x"
+
+# (y center of the screenshot) - (y center of the icon) = the y location for the icon overlay
+let y="($height / 2) - ($icon_height / 2)"
+echo "y: $y"
+
+convert $screen $icon -geometry +$x+$y -composite -matte $screen
+echo "converting image..."
+
+# Lock the screen with our finished pixelated image
+i3lock -u -i $screen
+
+# Remove our temp file for our screenshot
+rm $screen
