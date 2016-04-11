@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # First make sure the tracking branches are up-to-date
-git remote update 2>&1 /dev/null
+echo "Updating remote tracking branch..."
+git remote update 2>&1 > /dev/null
 
 # Determine the revisions of the local repo, the remote and the base
 LOCAL=$(git rev-parse @)
