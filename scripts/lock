@@ -4,7 +4,7 @@
 screen="/tmp/screen.png"
 
 # The location of the icon file to overlay in the center
-icon="/home/coleman/.i3/lock.png"
+icon="/home/coleman/.config/i3/lock.png"
 
 # Take the screenshot and save it in the directory specified by $screen
 scrot $screen
