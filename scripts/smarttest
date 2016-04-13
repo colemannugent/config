@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for i in {a..j}; do
+	echo -n "/dev/sd"$i": "
+	smartctl --test=short /dev/sd$i 
+done
