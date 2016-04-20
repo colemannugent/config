@@ -17,7 +17,7 @@ alias note='vim "$(date +"%A, %B %e %Y")".md'
 alias sudo='sudo env "PATH=$PATH"'
 
 # Git
-alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an> %Creset" --abbrev-commit'
+alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an %GK> %Creset" --abbrev-commit'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
