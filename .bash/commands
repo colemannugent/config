@@ -8,7 +8,7 @@ function whereami {
 }
 
 function stripurlsfromhtml {
-	 grep -Po '(?<=href=")[^"]*' index.html > tmp
+	 grep -Po '(?<=href=")[^"]*' $1
 }
 
 # See http://askubuntu.com/questions/27314/script-to-display-all-terminal-colors for details
