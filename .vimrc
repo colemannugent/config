@@ -3,14 +3,16 @@ set nocompatible
 " Now we can turn our filetype functionality back on
 filetype plugin indent on
 
-"Sets the default color scheme
-:color desert
+" Enable solarized color scheme
+set background=dark
+colorscheme solarized
+
 
 "Enables mouse support
-:set mouse=a
+set mouse=a
 
 "Enables syntax highlighting
-:syntax on
+syntax on
 
 "Enables line numbers
 set number
