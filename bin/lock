@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # A temporary file to hold the screenshot image
 screen="/tmp/screen.png"
 
@@ -7,6 +6,7 @@ screen="/tmp/screen.png"
 icon="/home/coleman/.config/i3/lock.png"
 
 # Take the screenshot and save it in the directory specified by $screen
+echo "Taking screenshot..."
 scrot $screen
 
 # Calculate the total width of the screenshot
@@ -29,8 +29,26 @@ echo "Icon Width: $icon_width"
 icon_height=$(identify $icon | cut -d " " -f 3 | awk -F'x' '{print $2}')
 echo "Icon Height: $icon_height"
 
-# Down-scale then up-scale the image to acheive the pixelated look
-convert $screen -scale 10% -scale 1000% $screen
+if [[ $1 == "pixelate" ]]; then
+	# Down-scale then up-scale the image to acheive the pixelated look
+	echo "Pixelating image..."
+	convert $screen -scale 5% -scale 2000% $screen
+
+elif [[ $1 == "hybrid" ]]; then
+	echo "Pixelating and blurring image..."
+	convert $screen -scale 5% -scale 2000% -blur 0x5 $screen
+
+elif [[ $1 == "rotate" ]]; then
+	echo "Radially blurring image..."
+	convert $screen -radial-blur 5 $screen
+
+elif [[ $1 == "grayscale" ]]; then
+	echo "Blurring and converting color space to grayscale..."
+	convert $screen -blur 16x8 -colorspace Gray $screen
+else
+	echo "Blurring image..."
+	convert $screen -blur 16x8 $screen
+fi
 
 # (x center of screenshot) - (x center of icon) = the x location for the icon overlay
 let x="($total_width / 2) - ($icon_width / 2)"
@@ -40,8 +58,8 @@ echo "x: $x"
 let y="($height / 2) - ($icon_height / 2)"
 echo "y: $y"
 
-convert $screen $icon -geometry +$x+$y -composite -matte $screen
-echo "converting image..."
+echo "Compositing lock image..."
+convert $screen $icon -filter Triangle -geometry +$x+$y -composite -matte $screen
 
 # Lock the screen with our finished pixelated image
 i3lock -u -i $screen
