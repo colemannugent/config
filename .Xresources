@@ -1,18 +1,23 @@
-urxvt.font: xft:terminus:pixelsize=14
-urxvt.scrollBar:        false
+! TODO: -add variables to easily manipulate color scheme
+! 	-rename the solarized dark colors to actually be human readablE
+! 	-general cleanup & documentation
+! 	-compton transparency & autostart
+! 	-relative line numbers in vim
+! 	-maybe alt colors for every value?
+! 	-check out how other people do it on GitHub
+! Colors
 
-Xft.antialias:          true
-Xft.hinting:            full
+! Color scheme
+#define U_window_highlight_on	#066999
+#define U_window_highlight_off	#B0C4DE
+#define U_window_urgent		#dc322f
+#define U_window_inactive	#B0C4DE
+#define U_text_color		#eceff1
+#define U_text_color_alt	#3f3f3f
 
-urxvt.transparent:   true
-urxvt.tintColor:     white
-urxvt.shading:       20 
- 
-! http://ethanschoonover.com/solarized
 
-
+! solarized color scheme from  http://ethanschoonover.com/solarized
 ! Common
-
 #define S_yellow        #b58900
 #define S_orange        #cb4b16
 #define S_red           #dc322f
@@ -22,9 +27,7 @@ urxvt.shading:       20
 #define S_cyan          #2aa198
 #define S_green         #859900
 
-
 ! Dark
-
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -35,28 +38,84 @@ urxvt.shading:       20
 #define S_base3         #fdf6e3
 
 
-urxvt.background:              S_base03
-urxvt.foreground:              S_base0
-urxvt.fading:                  40
-urxvt.fadeColor:               S_base03
-urxvt.cursorColor:             S_base1
-urxvt.pointerColorBackground:  S_base01
-urxvt.pointerColorForeground:  S_base1
+! xft
+Xft.antialias:true
+Xft.hinting:full
 
-urxvt.color0:	S_base02
-urxvt.color1:	S_red
-urxvt.color2:	S_green
-urxvt.color3:	S_yellow
-urxvt.color4:	S_blue
-urxvt.color5:	S_magenta
-urxvt.color6:	S_cyan
-urxvt.color7:	S_base2
-urxvt.color9:	S_orange
-urxvt.color8:	S_base03
-urxvt.color10:	S_base01
-urxvt.color11:	S_base00
-urxvt.color12:	S_base0
-urxvt.color13:	S_violet
-urxvt.color14:	S_base1
-urxvt.color15:	S_base3
 
+! urxvt
+urxvt.font:			xft:terminus:pixelsize=14
+urxvt.scrollBar:		false
+urxvt.transparent:		true
+urxvt.tintColor:		white
+urxvt.shading:			20 
+urxvt.background:		S_base03
+urxvt.foreground:		S_base0
+urxvt.fading:			40
+urxvt.fadeColor:		S_base03
+urxvt.cursorColor:		S_base1
+urxvt.pointerColorBackground:	S_base01
+urxvt.pointerColorForeground:	S_base1
+urxvt.color0:			S_base02
+urxvt.color1:			S_red
+urxvt.color2:			S_green
+urxvt.color3:			S_yellow
+urxvt.color4:			S_blue
+urxvt.color5:			S_magenta
+urxvt.color6:			S_cyan
+urxvt.color7:			S_base2
+urxvt.color9:			S_orange
+urxvt.color8:			S_base03
+urxvt.color10:			S_base01
+urxvt.color11:			S_base00
+urxvt.color12:			S_base0
+urxvt.color13:			S_violet
+urxvt.color14:			S_base1
+urxvt.color15:			S_base3
+
+
+! rofi
+rofi.width:		50
+rofi.fullscreen:	false
+rofi.fixed-num-lines:	true
+rofi.bw:		0
+rofi.location:		0
+rofi.terminal:		urxvt
+rofi.lines:		10
+rofi.eh:		1
+rofi.font:		Terminus 12
+!
+!	  ├────────────────────rofi.width──────────────────────┤
+!	┬ ╔════════════════════════════════════════════════════╗
+!	│ ║run:item                                            ║ ◀- rofi.color-window[0]
+!	│ ║====================================================║ ◀- rofi.separator-style
+!	│ ║item1                                              ▮║
+!	│ ╟───────────────────────────────────────────────────▮╢
+!	│ ║item2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX▮║ ◀- selected line
+!	│ ╟───────────────────────────────────────────────────▮╢
+!	│ ║item3                                              ▮║
+!	│ ╟───────────────────────────────────────────────────▮╢
+!	│ ║item4                                              ▮║
+!	│ ╟───────────────────────────────────────────────────▮╢
+!	│ ║item5                                              ▮║
+!	┴ ╚════════════════════════════════════════════════════╝
+!	▲                                                     ▲
+!	│                                                     │
+!	rofi.lines                                            rofi.hide-scrollbar
+!
+! format:		main background,	main border color,	separator color
+rofi.color-window:	argb:aa263238,		argb:aa263238,		#26a69a
+! format:		background,		text foreground,	background alt,		highlight background,	highlight foreground
+rofi.color-normal:	argb:aa + U_window_highlight_on,	U_text_color,		U_window_highlight_on,	#f4246b,		U_text_color
+rofi.color-active:	U_window_highlight_on,	#268bd2,		#eee8d5,		#268bd2,		#fdf6e3
+rofi.color-urgent:	#fdf6e3,		#dc322f,		#eee8d5,		#dc322f,		#fdf6e3
+rofi.separator-style:	none
+rofi.hide-scrollbar:	true
+
+! i3wm
+i3wm.highlight_on:U_window_highlight_on
+i3wm.highlight_off:U_window_highlight_off
+i3wm.window_urgent:U_window_urgent
+i3wm.window_inactive:U_window_inactive
+i3wm.text_color:U_text_color
+i3wm.text_color_alt:U_text_color_alt
