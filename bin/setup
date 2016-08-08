@@ -2,7 +2,7 @@
 #### Sync various settings, files, and scripts across devices ####
 
 ## Variables ##
-package_list="/home/coleman/scripts/packages.txt"
+package_list="/home/coleman/bin/packages.txt"
 
 #Print various information about this script
 echo "[INFO] Starting synchronization script..."
