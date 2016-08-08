@@ -26,3 +26,10 @@ set tabstop=8
 set softtabstop=0 
 set noexpandtab 
 set shiftwidth=8
+
+"Enable persistent undo
+if has('persistent_undo')
+	call system('mkdir -p ~/.vim/undo')
+	set undodir=~/.vim/undo
+	set undofile
+endif
