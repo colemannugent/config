@@ -8,28 +8,31 @@ set background=dark
 colorscheme solarized
 
 
-"Enables mouse support
+" Enables mouse support
 set mouse=a
 
-"Enables syntax highlighting
+" Enables syntax highlighting
 syntax on
 
-"Enables line numbers
+" Enables line numbers
 set number
 
-"Key Mappings
+" Key Mappings
 map <F7> :tabp<CR>
 map <F8> :tabn<CR>
 
-"Explicitly set the tab behavoiur
+" Explicitly set the tab behavoiur
 set tabstop=8
 set softtabstop=0 
 set noexpandtab 
 set shiftwidth=8
 
-"Enable persistent undo
+" Enable persistent undo
 if has('persistent_undo')
 	call system('mkdir -p ~/.vim/undo')
 	set undodir=~/.vim/undo
 	set undofile
 endif
+
+" Save the file, even if I am still pressing shift
+command W w
