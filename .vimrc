@@ -7,6 +7,11 @@ filetype plugin indent on
 set background=dark
 colorscheme solarized
 
+" Enable relative line numbering
+set relativenumber
+
+" Show a line at the 80 character mark
+set colorcolumn=80
 
 " Enables mouse support
 set mouse=a
