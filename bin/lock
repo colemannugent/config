@@ -1,8 +1,13 @@
 #!/bin/bash
+# This is a modified version of the classic i3lock script that focuses on speed
+# and usability on more than just one monitor. Try some of the different modes
+# e.g. "lock pixelate" or "lock hybrid"
+
 # A temporary file to hold the screenshot image
 screen="/tmp/screen.png"
 
 # The location of the icon file to overlay in the center
+# TODO: make this not specific to my username
 icon="/home/coleman/.config/i3/lock.png"
 
 # Take the screenshot and save it in the directory specified by $screen

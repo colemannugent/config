@@ -1,6 +1,14 @@
 #!/bin/bash
 
-for i in {a..j}; do
+# A simple loop through the specified drives that prints the results of the last
+# smart test. The drive range is controlled by 2 arguments
+
+if ! [ -x "$(command -v smartctl)" ]; then
+	echo "You don't have smartctl installed! Please install it before continuing!"
+	exit
+fi
+
+for i in {$1..$2}; do
 	echo -n "/dev/sd"$i": "
 	smartctl --all /dev/sd$i | grep "# 1"
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+# An old script to manage bukkit servers (back in the good old days of 
+# craftbukkit). Basically just a modified init script
 
 serverdir="/game/minecraft/bukkit/"
 

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script compares a local git repo to its remote counterpart and prints
+# information about whether or not the local repo is up to date.
+
 # First make sure the tracking branches are up-to-date
 echo "Updating remote tracking branch..."
 git remote update 2>&1 > /dev/null

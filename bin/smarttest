@@ -1,6 +1,13 @@
 #!/bin/bash
 
-for i in {a..j}; do
+# A simple loop that starts a SMART test for all the drives specified
+
+if ! [ -x "$(command -v smartctl)" ]; then
+	echo "You don't have smartctl installed! Please install it before continuing!"
+	exit
+fi
+
+for i in {$1..$2}; do
 	echo -n "/dev/sd"$i": "
 	smartctl --test=short /dev/sd$i 
 done
