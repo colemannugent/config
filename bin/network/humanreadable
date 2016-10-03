@@ -1,3 +1,0 @@
-#!/bin/bash
-# Converts bytes to a human readable format
-numfmt --to=iec-i --suffix=B $1
