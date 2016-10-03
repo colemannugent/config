@@ -1,4 +1,8 @@
 <?php
+// afkmanager.php
+// A fairly simple program to remove AFK users from my teamspeak server
+// preserved here for posterity.
+
 //Declare variables
 	$server = '127.0.0.1';
 	$port = '10011';
