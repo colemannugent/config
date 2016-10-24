@@ -22,9 +22,16 @@ syntax on
 " Enables line numbers
 set number
 
+" Set the leader to <Space>
+let mapleader = "\<Space>"
+
+" Some easy ways to get out of insert mode
+inoremap jk <Esc>
+inoremap kj <Esc>
+
 " Key Mappings
-map <F7> :tabp<CR>
-map <F8> :tabn<CR>
+noremap <F7> :tabp<Enter>
+noremap <F8> :tabn<Enter>
 
 " Explicitly set the tab behavoiur
 set tabstop=8
@@ -56,3 +63,12 @@ command IDE call SetupIDE()
 
 " Map <Leader>I to enter "IDE" mode
 noremap <Leader>I :IDE<Enter>
+
+" Map <Leader>w to write the current buffer
+noremap <Leader>w :write<Enter>
+
+" Map <Leader>q to save and quit
+noremap <Leader>q :wq<Enter>
+
+" Map <Leader>Q to quit immediately
+noremap <Leader>Q :q!<Enter>
