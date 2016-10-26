@@ -72,3 +72,12 @@ noremap <Leader>q :wq<Enter>
 
 " Map <Leader>Q to quit immediately
 noremap <Leader>Q :q!<Enter>
+
+" Map <Leader>i to show the current buffers
+noremap <Leader>i :buffers<Enter>
+
+" Map <Leader>l to move forward a buffer
+noremap <Leader>j :bnext<Enter>
+
+" Map <Leader>h to move back a buffer
+noremap <Leader>k :bprevious<Enter>
