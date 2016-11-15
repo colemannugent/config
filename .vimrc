@@ -81,3 +81,9 @@ noremap <Leader>j :bnext<Enter>
 
 " Map <Leader>h to move back a buffer
 noremap <Leader>k :bprevious<Enter>
+
+" Map <Leader>h to use xxd to render a hexdump of the file
+noremap <Leader>h :%!xxd -c 32<Enter>
+
+" Map <Leader>h to use xxd to revert a hexdump to ascii
+noremap <Leader>H :%!xxd -c 32 -r<Enter>
