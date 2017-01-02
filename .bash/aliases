@@ -37,3 +37,6 @@ alias rm='rm -I -v'
 
 # Make mount output prettier
 alias mountt='mount | column -t'
+
+# Force Mutt to use the correct config file
+alias mutt='mutt -F ~/.config/mutt/muttrc'
