@@ -1,0 +1,67 @@
+# Resources:
+# Arch Wiki: https://wiki.archlinux.org/index.php/mutt#IMAP
+# https://www.linux.com/blog/setup-mutt-gmail-centos-and-ubuntu
+
+# Set real name
+set realname = "Coleman Nugent"
+
+# For GMail username must be full email address
+set imap_user = "colemannugent@gmail.com"
+
+# Source solarized dark theme
+source ~/.config/mutt/mutt-colors-solarized-dark-256.muttrc
+
+# Read password from GNU pass
+set my_pass = `pass ring-0/mutt`
+set imap_pass = $my_pass
+set smtp_pass = $my_pass
+
+# Specify folder for mail
+set folder = "imaps://imap.gmail.com/"
+
+# Set location for sent mail
+set record = "~/.local/share/mutt/sent"
+
+# Where unfiltered mail arrives
+set spoolfile = "+INBOX"
+
+# Store message headers locally to speed things up.
+# If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
+set header_cache = "~/.cache/mutt"
+
+# Store messages locally to speed things up, like searching message bodies.
+# Can be the same folder as header_cache.
+# This will cost important disk usage according to your e-mail amount.
+set message_cachedir = "~/.cache/mutt"
+
+# Specify where to save and/or look for postponed messages.
+set postponed = "+[Gmail]/Drafts"
+
+# Allow Mutt to open new imap connection automatically.
+unset imap_passive
+
+# Keep IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+
+# Only use secure connections
+set ssl_starttls=yes
+set ssl_force_tls=yes
+
+# SMTP Connection settings
+set smtp_url = "smtps://colemannugent@gmail.com@smtp.gmail.com:465/"
+
+# Make sure we use ViM as our editor
+set editor = "vim"
+
+# Don't automatically move read mail
+set move = no
+
+# Specify our character set
+set charset = "utf-8"
+
+# Bindings
+# Bind G to fetch mail
+bind index G imap-fetch-mail
