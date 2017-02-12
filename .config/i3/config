@@ -1,0 +1,274 @@
+################################## APPEARANCES ################################
+# set gap settings
+gaps inner 10
+gaps outer 5
+
+# outline settings
+new_window pixel 3
+
+#Set the font
+font pango: xos4 Terminus 10
+
+# pull colors from Xresources and use hot pink as a fallback
+set_from_resource $hl_on		i3wm.highlight_on	#FF69B4
+set_from_resource $hl_off		i3wm.highlight_off	#FF69B4
+set_from_resource $window_urgent	i3wm.window_urgent	#FF69B4
+set_from_resource $window_inactive	i3wm.window_inactive	#FF69B4
+set_from_resource $text_color		i3wm.text_color		#FF69B4
+set_from_resource $text_color_alt	i3wm.text_color_alt	#FF69B4
+
+# Color explanation:		border		background	text		indicator
+client.focused			$hl_off		$hl_on		$hl_off		$hl_on
+client.focused_inactive		$hl_on		$hl_off		$hl_on		$hl_off
+client.unfocused		$hl_on		$hl_on		$hl_on		$hl_off
+
+
+################################# MODIFIERS ###################################
+# Set the modifier key to the "super" key
+set $mod Mod4
+
+# Set the key for the program layer
+set $prog Mod1
+
+# Set the key for the window manager layer
+set $win Shift
+
+
+################################ AUTOSTART ####################################
+
+# Restore GNOME's settings
+exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
+
+# Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
+exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+
+# Set the default pulseaudio sink. This allows the XF86 audio buttons to actually control the master sink
+exec --no-startup-id pacmd set-default-sink alsa_output.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.analog-stereo
+
+# Set the background with feh
+exec --no-startup-id source ~/.fehbg
+
+# Lock the screen after 15 minutes
+exec xautolock -time 15 -locker /home/coleman/bin/lock &
+
+# Start compton
+exec --no-startup-id compton
+
+########################## WINDOW MANAGER COMMANDS ############################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# split in horizontal orientation
+bindsym $mod+$win+h split h
+
+# split in vertical orientation
+bindsym $mod+$win+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+$win+f fullscreen
+
+# enter super fullscreen mode for the focused container
+bindsym $mod+$win+g fullscreen toggle global
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+$win+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+
+# kill focused window
+bindsym $mod+$win+q kill
+
+# focus the parent container
+bindsym $mod+$win+a focus parent
+
+# focus the child container
+bindsym $mod+$win+d focus child
+
+#bindsym $mod+Shift+m move scratchpad
+#bindsym $mod+k scratchpad show
+
+# reload the configuration file
+bindsym $mod+$win+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+$win+i restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+$win+l exec "i3-nagbar -t warning -m 'Logout?' -b 'Yes' 'i3-msg exit'"
+
+# Enter resize mode
+bindsym $mod+$win+r mode "resize"
+
+# Window movement keys
+bindsym $mod+$win+Left move left
+bindsym $mod+$win+Down move down
+bindsym $mod+$win+Up move up
+bindsym $mod+$win+Right move right
+
+# Keybindings for resize mode
+mode "resize" {
+        # ViM bindings
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+########################### PROGRAM SHORTCUTS #################################
+# start dmenu (a program launcher)
+bindsym $prog+d exec rofi -show run
+
+#Toggle OpenVPN client
+bindsym $prog+o exec --no-startup-id /home/coleman/scripts/togglevpn
+
+#Launch Chromium
+bindsym $prog+b exec google-chrome-stable
+
+#Start the file manager
+bindsym $prog+m exec nautilus
+
+# lock the screen
+bindsym $prog+l exec /home/coleman/bin/lock 
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+## ALSA Volume Keybinds ##
+# Volume up
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute && killall -SIGUSR1 i3status
+
+# Volume down
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute && killall -SIGUSR1 i3status
+
+# Toggle mute
+bindsym XF86AudioMute exec amixer -q set Master toggle && killall -SIGUSR1 i3status
+
+
+################################# WORKSPACES ##################################
+# Window navigation keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+# Workspace keys
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+a workspace a
+bindsym $mod+b workspace b
+bindsym $mod+c workspace c
+bindsym $mod+d workspace d
+bindsym $mod+e workspace e
+bindsym $mod+f workspace f
+bindsym $mod+g workspace g
+bindsym $mod+h workspace h
+bindsym $mod+i workspace i
+bindsym $mod+j workspace j
+bindsym $mod+k workspace k
+bindsym $mod+l workspace l
+bindsym $mod+m workspace m
+bindsym $mod+n workspace n
+bindsym $mod+o workspace o
+bindsym $mod+p workspace p
+bindsym $mod+q workspace q
+bindsym $mod+r workspace r
+bindsym $mod+s workspace s
+bindsym $mod+t workspace t
+bindsym $mod+u workspace u
+bindsym $mod+v workspace v
+bindsym $mod+w workspace w
+bindsym $mod+x workspace x
+bindsym $mod+y workspace y
+bindsym $mod+z workspace z
+
+# move focused container to workspace
+bindsym $mod+$prog+1 move container to workspace 1
+bindsym $mod+$prog+2 move container to workspace 2
+bindsym $mod+$prog+3 move container to workspace 3
+bindsym $mod+$prog+4 move container to workspace 4
+bindsym $mod+$prog+5 move container to workspace 5
+bindsym $mod+$prog+6 move container to workspace 6
+bindsym $mod+$prog+7 move container to workspace 7
+bindsym $mod+$prog+8 move container to workspace 8
+bindsym $mod+$prog+9 move container to workspace 9
+bindsym $mod+$prog+0 move container to workspace 10
+bindsym $mod+$prog+a move container to workspace a
+bindsym $mod+$prog+b move container to workspace b
+bindsym $mod+$prog+c move container to workspace c
+bindsym $mod+$prog+d move container to workspace d
+bindsym $mod+$prog+e move container to workspace e
+bindsym $mod+$prog+f move container to workspace f
+bindsym $mod+$prog+g move container to workspace g
+bindsym $mod+$prog+h move container to workspace h
+bindsym $mod+$prog+i move container to workspace i
+bindsym $mod+$prog+j move container to workspace j
+bindsym $mod+$prog+k move container to workspace k
+bindsym $mod+$prog+l move container to workspace l
+bindsym $mod+$prog+m move container to workspace m
+bindsym $mod+$prog+n move container to workspace n
+bindsym $mod+$prog+o move container to workspace o
+bindsym $mod+$prog+p move container to workspace p
+bindsym $mod+$prog+q move container to workspace q
+bindsym $mod+$prog+r move container to workspace r
+bindsym $mod+$prog+s move container to workspace s
+bindsym $mod+$prog+t move container to workspace t
+bindsym $mod+$prog+u move container to workspace u
+bindsym $mod+$prog+v move container to workspace v
+bindsym $mod+$prog+w move container to workspace w
+bindsym $mod+$prog+x move container to workspace x
+bindsym $mod+$prog+y move container to workspace y
+bindsym $mod+$prog+z move container to workspace z
+
+# Bind three workspaces to each monitor by default. This makes it very easy to tell what workspace is where
+workspace 1 output DVI-I-1
+workspace 2 output DVI-I-1
+workspace 3 output DVI-I-1
+
+workspace 4 output DVI-D-0
+workspace 5 output DVI-D-0
+workspace 6 output DVI-D-0
+
+workspace 7 output DP-0
+workspace 8 output DP-0
+workspace 9 output DP-0
+
+
+############################ i3bar CONFIGURATION ##############################
+bar {
+	i3bar_command i3bar -t
+        status_command py3status -c ~/.config/i3/i3status.conf
+	separator_symbol "|"
+	tray_output DVI-D-0
+	colors {
+		background #2632387f
+		statusline $text_color
+		separator #cfd8dcff
+		# colors		outline		background		number
+		focused_workspace	$hl_on		$hl_on			$text_color
+		active_workspace	$hl_off		$hl_off			$text_color_alt
+		inactive_workspace	$hl_off		$window_inactive	$text_color_alt
+		urgent_workspace	$hl_off		$window_urgent		$text_color_alt
+	}
+}
