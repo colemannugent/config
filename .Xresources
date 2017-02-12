@@ -8,12 +8,17 @@
 ! Colors
 
 ! Color scheme
-#define U_window_highlight_on	#066999
-#define U_window_highlight_off	#B0C4DE
-#define U_window_urgent		#dc322f
-#define U_window_inactive	#B0C4DE
-#define U_text_color		#eceff1
-#define U_text_color_alt	#3f3f3f
+#define U_window_transparent		argb:00000000
+#define U_window_highlight_on		#066999
+#define U_window_highlight_on_a		argb:cc066999
+#define U_window_highlight_off		#B0C4DE
+#define U_window_highlight_off_a	argb:ccB0C4DE
+#define U_window_background		#263238
+#define U_window_background_a		argb:96263238
+#define U_window_urgent			#dc322f
+#define U_window_inactive		#B0C4DE
+#define U_text_color			#eceff1
+#define U_text_color_alt		#3f3f3f
 
 
 ! solarized color scheme from  http://ethanschoonover.com/solarized
@@ -44,7 +49,7 @@ Xft.hinting:full
 
 
 ! urxvt
-urxvt.font:			xft:terminus:pixelsize=14
+urxvt.font:			-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
 urxvt.scrollBar:		false
 urxvt.transparent:		true
 urxvt.tintColor:		white
@@ -75,40 +80,46 @@ urxvt.color15:			S_base3
 
 
 ! rofi
-rofi.width:		50
+rofi.width:		25
 rofi.fullscreen:	false
-rofi.fixed-num-lines:	true
+rofi.fixed-num-lines:	false
 rofi.bw:		0
 rofi.location:		0
 rofi.terminal:		urxvt
 rofi.lines:		10
 rofi.eh:		1
-rofi.font:		Terminus 12
+rofi.font:		xos4 Terminus 12
 !
 !	  ├────────────────────rofi.width──────────────────────┤
 !	┬ ╔════════════════════════════════════════════════════╗
-!	│ ║run:item                                            ║ ◀- rofi.color-window[0]
+!	│ ║run:query                                           ║ ◀- rofi.color-window[0]
 !	│ ║====================================================║ ◀- rofi.separator-style
-!	│ ║item1                                              ▮║
-!	│ ╟───────────────────────────────────────────────────▮╢
-!	│ ║item2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX▮║ ◀- selected line
-!	│ ╟───────────────────────────────────────────────────▮╢
-!	│ ║item3                                              ▮║
-!	│ ╟───────────────────────────────────────────────────▮╢
-!	│ ║item4                                              ▮║
-!	│ ╟───────────────────────────────────────────────────▮╢
-!	│ ║item5                                              ▮║
+!	│ ║item1░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█║ ◀- rofi.color-normal[0] 
+!	│ ╟───────────────────────────────────────────────────█╢
+!	│ ║item2▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█║ ◀- selected line
+!	│ ╟───────────────────────────────────────────────────█╢
+!	│ ║item3░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█║
+!	│ ╟───────────────────────────────────────────────────█╢
+!	│ ║item4▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█║ ◀- rofi.color-normal[2] 
+!	│ ╟───────────────────────────────────────────────────█╢
+!	│ ║item5░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█║
 !	┴ ╚════════════════════════════════════════════════════╝
 !	▲                                                     ▲
 !	│                                                     │
 !	rofi.lines                                            rofi.hide-scrollbar
 !
-! format:		main background,	main border color,	separator color
-rofi.color-window:	argb:aa263238,		argb:aa263238,		#26a69a
-! format:		background,		text foreground,	background alt,		highlight background,	highlight foreground
-rofi.color-normal:	argb:aa + U_window_highlight_on,	U_text_color,		U_window_highlight_on,	#f4246b,		U_text_color
-rofi.color-active:	U_window_highlight_on,	#268bd2,		#eee8d5,		#268bd2,		#fdf6e3
-rofi.color-urgent:	#fdf6e3,		#dc322f,		#eee8d5,		#dc322f,		#fdf6e3
+!			main background,		main border color,		separator color
+rofi.color-window:	U_window_background_a,		U_window_background_a,		#26a69a
+
+!			line background,		text foreground,		alt line background,		highlighted background,		highlighted foreground
+rofi.color-normal:	U_window_transparent,		U_text_color,			U_window_transparent,		U_window_highlight_on_a,	U_text_color
+
+! 			active window											text on selected line
+rofi.color-active:	U_window_highlight_off,		#268bd2,			#eee8d5,			#268bd2,			#FDF6E3
+
+!			#fdf6e3,
+rofi.color-urgent:	#00ff00,			#dc322f,			#eee8d5,			#dc322f,			#fdf6e3
+
 rofi.separator-style:	none
 rofi.hide-scrollbar:	true
 
