@@ -38,3 +38,6 @@ export HISTTIMEFORMAT='%F %T '
 
 # Check the window size after each command and, if necessary,update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# Make sure GPG knows what TTY we are using
+export GPG_TTY=$(tty)
