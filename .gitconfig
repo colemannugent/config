@@ -1,0 +1,8 @@
+[user]
+	name = Coleman Nugent
+	email = colemannugent@gmail.com
+	signingkey = 293EC4CFD5AE0D3AFACEDB99F62B918EDAB52741
+[commit]
+	gpgsign = true
+[core]
+	abbrev = 12
