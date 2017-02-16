@@ -40,3 +40,6 @@ alias mountt='mount | column -t'
 
 # Force Mutt to use the correct config file
 alias mutt='mutt -F ~/.config/mutt/muttrc'
+
+# Force ncmpcpp to use sane bindings
+alias ncmpcpp='ncmpcpp -b .config/ncmpcpp/bindings'
