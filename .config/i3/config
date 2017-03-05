@@ -129,7 +129,7 @@ mode "resize" {
 
 ########################### PROGRAM SHORTCUTS #################################
 # start dmenu (a program launcher)
-bindsym $prog+d exec rofi -show run
+bindsym $prog+d exec rofi -modi drun,run,ssh,window -show run
 
 #Toggle OpenVPN client
 bindsym $prog+o exec --no-startup-id /home/coleman/scripts/togglevpn
@@ -260,7 +260,7 @@ bar {
 	i3bar_command i3bar -t
         status_command py3status -c ~/.config/i3/i3status.conf
 	separator_symbol "|"
-	tray_output DVI-D-0
+	tray_output DP-0
 	colors {
 		background #2632387f
 		statusline $text_color
