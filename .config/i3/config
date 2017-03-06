@@ -129,7 +129,7 @@ mode "resize" {
 
 ########################### PROGRAM SHORTCUTS #################################
 # start dmenu (a program launcher)
-bindsym $prog+d exec rofi -modi drun,run,ssh,window -show run
+bindsym $prog+d exec "rofi -modi drun,run,ssh,window -show run"
 
 #Toggle OpenVPN client
 bindsym $prog+o exec --no-startup-id /home/coleman/scripts/togglevpn
