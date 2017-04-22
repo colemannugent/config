@@ -23,3 +23,9 @@ function colortest {
 	done; 
 	echo "";
 }
+
+# Render notes taken in markdown to HTML and include a style file for some basic styling
+function rendernotes {
+	cat styles.md > $1.html
+	markdown $1.md >> $1.html
+}
