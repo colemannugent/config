@@ -1,5 +1,22 @@
 set nocompatible
 
+" Make sure our environment is setup correctly
+if !isdirectory($XDG_CACHE_HOME . "vim/undo")
+	call mkdir($XDG_CACHE_HOME . "vim/undo", "p", 0700)
+endif
+
+set directory=.,$XDG_CACHE_HOME/vim
+set backupdir=.,$XDG_CACHE_HOME/vim
+set viminfo="$XDG_CACHE_HOME/vim/viminfo"
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+
+" Enable persistent undo if supported
+if has('persistent_undo')
+	set undodir=$XDG_CACHE_HOME"/vim/undo"
+	set undofile
+endif
+
 " Now we can turn our filetype functionality back on
 filetype plugin indent on
 
@@ -38,13 +55,6 @@ set tabstop=8
 set softtabstop=0 
 set noexpandtab 
 set shiftwidth=8
-
-" Enable persistent undo
-if has('persistent_undo')
-	call system('mkdir -p ~/.vim/undo')
-	set undodir=~/.vim/undo
-	set undofile
-endif
 
 " Save the file, even if I am still pressing shift
 command W w
