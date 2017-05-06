@@ -29,3 +29,12 @@ function rendernotes {
 	cat styles.md > $1.html
 	markdown $1.md >> $1.html
 }
+
+# Toggle the $lb variable which controls whether or not the prompt will be on another line
+function lb {
+	if [ "$lb" == "true" ]; then
+		export lb="false"
+	else
+		export lb="true"
+	fi
+}

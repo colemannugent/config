@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# The FLAGS variable will be inserted into the appropriate place into the prompt string
+FLAGS=""
+
+# Add the number of currently running jobs to the FLAGS variable
+FLAGS+=$(jobs | wc -l)
+
+# Check if running in tmux and set appropriate flag
+if [ "$TMUX" != "" ]; then
+	FLAGS+="t"
+fi
+
+# Check if running in vi mode and set appropriate flag
+if [[ $SHELLOPTS == *vi* ]]; then
+	FLAGS+="v"
+fi
+
+# Check if multiline breaks are on via our env variable $lb
+if [ "$lb" == "true" ]; then
+	LINEBREAK="\n"
+	FLAGS+="l"
+else
+	LINEBREAK=""
+fi
+
+# Export the prompt string
+export PS1="$USER_COLOR\u$FG_DEFAULT@$HOST_COLOR\h$FG_DEFAULT [$FLAGS] $FG_PURPLE\w$FG_DEFAULT $LINEBREAK\$ "

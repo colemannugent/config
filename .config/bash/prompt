@@ -1,15 +1,13 @@
 #!/bin/bash
 
-#### Prompt Configuration File ####
-
-#Set username color based on who is logged in
+# Set username color based on who is logged in
 if [ "$USER" == "coleman" ]; then
 	USER_COLOR=$FG_CYAN
 elif [ "$USER" == "root" ]; then
 	USER_COLOR=$FG_RED
 fi
 
-#Set hostname color based on which host is connected
+# Set hostname color based on which host is connected
 if [ "$HOSTNAME" == "cobalt" ]; then
 	HOST_COLOR=$FG_BLUE
 elif [ "$HOSTNAME" == "coleman-tower" ]; then
@@ -24,13 +22,11 @@ elif [ "$HOSTNAME" == "monitor" ]; then
 	HOST_COLOR=$FG_RED
 fi
 
-#Combine the various parts of the prompt
-PS1="$USER_COLOR\u$FG_DEFAULT@$HOST_COLOR\h$FG_DEFAULT $FG_PURPLE\w$FG_DEFAULT \$ "
+# Export prompt_command
+export PROMPT_COMMAND="source ~/.config/bash/prompt_command"
 
-#Export the ps1 variable
-export PS1
-
-#Attach tmux if started and the shell is interactive, create one if not
+# Attach tmux if started and the shell is interactive, create one if not
+# FIXME: Currently, this is non-functional
 if [ "$-" == "*i*" ]; then
 	if [ -z "$TMUX" ]; then
 		tmux attach
