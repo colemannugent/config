@@ -24,5 +24,10 @@ else
 	LINEBREAK=""
 fi
 
+# Check if the current directory contains a git repo
+if [ -d ".git" ]; then
+	FLAGS+="g"
+fi
+
 # Export the prompt string
 export PS1="$USER_COLOR\u$FG_DEFAULT@$HOST_COLOR\h$FG_DEFAULT [$FLAGS] $FG_PURPLE\w$FG_DEFAULT $LINEBREAK\$ "
