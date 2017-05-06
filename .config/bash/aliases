@@ -2,6 +2,7 @@
 
 # apt-get and aptitude
 alias upandup='sudo apt update && sudo apt upgrade -y'
+alias uu='upandup'
 alias install='sudo apt install'
 alias remove='sudo apt remove'
 alias autoremove='sudo apt-get autoremove'
@@ -25,6 +26,7 @@ alias ..='cd ..'
 alias mkdir='mkdir -pv'
 alias ls='ls -a --color=auto'
 alias la='ls -alh'
+alias l='la'
 
 # Safety Checks (aka, always prompt for confirmation)
 alias mv='mv -i -v'
