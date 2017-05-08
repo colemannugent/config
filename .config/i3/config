@@ -135,7 +135,7 @@ bindsym $prog+d exec "rofi -modi drun,run,ssh,window -show run"
 bindsym $prog+o exec --no-startup-id /home/coleman/scripts/togglevpn
 
 #Launch Chromium
-bindsym $prog+b exec google-chrome-stable
+bindsym $prog+b exec firefox
 
 #Start the file manager
 bindsym $prog+m exec nautilus
