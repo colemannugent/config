@@ -38,3 +38,12 @@ function lb {
 		export lb="true"
 	fi
 }
+
+function uu {
+	echo "Waiting for dpkg lock..."
+	while fuser /var/lib/dpkg/lock >/dev/null 2>&1 ; do
+		sleep 1
+	done
+	
+	sudo apt update && sudo apt upgrade --yes
+}

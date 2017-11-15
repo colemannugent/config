@@ -2,7 +2,6 @@
 
 # apt-get and aptitude
 alias upandup='sudo apt update && sudo apt upgrade -y'
-alias uu='upandup'
 alias install='sudo apt install'
 alias remove='sudo apt remove'
 alias autoremove='sudo apt-get autoremove'
