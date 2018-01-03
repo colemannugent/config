@@ -10,7 +10,7 @@ set realname = "Coleman Nugent"
 set imap_user = "colemannugent@gmail.com"
 
 # Source solarized dark theme
-source ~/.config/mutt/mutt-colors-solarized-dark-256.muttrc
+source ~/.config/mutt/mutt-colors-solarized-dark-16.muttrc
 
 # Read password from GNU pass
 set my_pass = `pass ring-0/mutt`
