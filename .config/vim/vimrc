@@ -46,6 +46,15 @@ syntax on
 " Enables line numbers
 set number
 
+" Highlight trailing spaces
+match ErrorMsg '\s\+$'
+
+" Show the column the cursor is in
+set cursorcolumn
+
+" Show the line the cursor is on
+set cursorline
+
 " Set the leader to <Space>
 let mapleader = "\<Space>"
 
@@ -59,8 +68,8 @@ noremap <F8> :tabn<Enter>
 
 " Explicitly set the tab behavoiur
 set tabstop=8
-set softtabstop=0 
-set noexpandtab 
+set softtabstop=0
+set noexpandtab
 set shiftwidth=8
 
 " Save the file, even if I am still pressing shift
