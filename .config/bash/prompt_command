@@ -4,7 +4,9 @@
 FLAGS=""
 
 # Add the number of currently running jobs to the FLAGS variable
-FLAGS+=$(jobs | wc -l)
+if [ -n "$(jobs -p)" ]; then
+	FLAGS+="j"
+fi
 
 # Check if running in tmux and set appropriate flag
 if [ "$TMUX" != "" ]; then
