@@ -41,3 +41,6 @@ alias mutt='mutt -F ~/.config/mutt/muttrc'
 
 # Force ncmpcpp to use sane bindings
 alias ncmpcpp='ncmpcpp -b .config/ncmpcpp/bindings'
+
+# Make viewing tasks with Taskwarrior easier
+alias work='task project:work'
