@@ -44,3 +44,5 @@ alias ncmpcpp='ncmpcpp -b .config/ncmpcpp/bindings'
 
 # Make viewing tasks with Taskwarrior easier
 alias work='task project:work'
+alias school='task project:school'
+alias personal='task project:personal'
