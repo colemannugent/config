@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Save history immediately rather than when the shell exits
+history -a
+history -n
+
 # The FLAGS variable will be inserted into the appropriate place into the prompt string
 FLAGS=""
 

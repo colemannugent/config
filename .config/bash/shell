@@ -26,9 +26,6 @@ export HISTCONTROL=ignoredups:ignorespace
 # Append to the history file, don't overwrite it
 shopt -s histappend
 
-# Save history immediately rather than when the shell exits
-PROMPT_COMMAND='history -a;history -n'
-
 # Setting both of the following to -1 means unlimited for both
 export HISTSIZE=-1
 export HISTFILESIZE=-1
