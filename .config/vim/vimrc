@@ -113,3 +113,6 @@ noremap <Leader>h :%!xxd -c 32<Enter>
 
 " Map <Leader>h to use xxd to revert a hexdump to ascii
 noremap <Leader>H :%!xxd -c 32 -r<Enter>
+
+" Map <Leader>d to insert the date as a markdown header
+noremap <Leader>d i##<Esc>:r!date<CR>kJ
