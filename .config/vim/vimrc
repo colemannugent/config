@@ -37,8 +37,14 @@ else
 	Plug 'plasticboy/vim-markdown'
 	Plug 'ledger/vim-ledger'
 	Plug 'altercation/vim-colors-solarized'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 	call plug#end()
 endif
+
+" Plugin settings
+let g:airline_powerline_fonts = 1
+let g:airline_theme='dark'
 
 " Enable persistent undo if supported
 if has('persistent_undo')
