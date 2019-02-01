@@ -55,6 +55,8 @@ endif
 " Plugin settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme='dark'
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_folding_disabled = 1
 
 " Enable persistent undo if supported
 if has('persistent_undo')
