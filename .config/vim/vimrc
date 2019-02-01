@@ -32,13 +32,23 @@ if empty(glob($XDG_CONFIG_HOME.'/vim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 else
 	call plug#begin($PLUGDIR)
+	" Productivity
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-fugitive'
+	Plug 'godlygeek/tabular'
+	Plug 'vim-airline/vim-airline'
+	Plug 'scrooloose/nerdtree'
+
+	" Themes
+	Plug 'altercation/vim-colors-solarized'
+	Plug 'vim-airline/vim-airline-themes'
+
+	" Language support
 	Plug 'plasticboy/vim-markdown'
 	Plug 'ledger/vim-ledger'
-	Plug 'altercation/vim-colors-solarized'
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+	Plug 'othree/html5.vim'
+	Plug 'hail2u/vim-css3-syntax'
+	Plug 'cakebaker/scss-syntax.vim'
 	call plug#end()
 endif
 
@@ -110,21 +120,6 @@ set shiftwidth=8
 " Save the file, even if I am still pressing shift
 command W w
 
-" Setup a "IDE" mode
-function SetupIDE()
-        let g:netrw_banner = 0          " Turn off the banner in netrw
-        let g:netrw_liststyle = 3       " Set the preffered list style
-        let g:netrw_browse_split = 4    " Open files in one split
-        let g:netrw_winsize = 12        " Set window size
-        Vexplore
-endfunction
-
-" Define a command to setup "IDE" mode
-command IDE call SetupIDE()
-
-" Map <Leader>I to enter "IDE" mode
-noremap <Leader>I :IDE<Enter>
-
 " Map <Leader>w to write the current buffer
 noremap <Leader>w :write<Enter>
 
@@ -151,3 +146,6 @@ noremap <Leader>H :%!xxd -c 32 -r<Enter>
 
 " Map <Leader>d to insert the date as a markdown header
 noremap <Leader>d i##<Esc>:r!date<CR>kJ
+
+" Map <Leader>n to open NerdTree
+noremap <Leader>n :NERDTreeToggle<CR>
