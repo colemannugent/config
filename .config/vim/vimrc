@@ -1,34 +1,41 @@
 set nocompatible
 
-" Set the location of the swapfiles
-set directory=$XDG_CACHE_HOME/vim/swap//
+" Location of the swapfiles
+let $SWAPDIR=$XDG_CACHE_HOME."vim/swap//"
+set directory=$SWAPDIR
 
-" Set the directory to use with :set backup=on
-set backupdir=.,$XDG_CACHE_HOME/vim
+" The directory to use with :set backup=on
+let $BACKUPDIR=$XDG_CACHE_HOME."vim/backup"
+set backupdir=$BACKUPDIR
 
-" Set the location to save vim state to
-set viminfofile=$XDG_CACHE_HOME/vim/viminfo
+" Location to save vim state to
+let &viminfofile=$XDG_CACHE_HOME."vim/viminfo"
 
-" Set the load order for runtime files
-set runtimepath=$VIM,$VIMRUNTIME,$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after
+" Various paths used in the runtimepath
+let $VIMDIR   = $XDG_CONFIG_HOME."vim/"
+let $VIMAFTER = $XDG_CONFIG_HOME."vim/after/"
+let $FZFDIR   = "/usr/share/vim/vimfiles/"
+let $PLUGDIR  = $XDG_CONFIG_HOME."vim/plugged"
 
-let $MYVIMRC=$XDG_CONFIG_HOME."/vim/vimrc"
-let $PLUGDIR=$XDG_CONFIG_HOME."/vim/plugged"
+" Directory to save persistent undo state to
+let $UNDODIR=$XDG_CACHE_HOME."vim/undo"
+set undodir=$UNDODIR
 
-" Make sure our environment is setup correctly
-if !isdirectory($XDG_CACHE_HOME . "vim/undo")
-	call mkdir($XDG_CACHE_HOME . "vim/undo", "p", 0700)
-endif
-if !isdirectory($XDG_CACHE_HOME . "vim/swap")
-	call mkdir($XDG_CACHE_HOME . "vim/swap", "p", 0700)
-endif
-if !isdirectory($PLUGDIR)
-	call mkdir($PLUGDIR, "p", 0700)
-endif
+let dirlist = [$BACKUPDIR, $PLUGDIR, $SWAPDIR, $UNDODIR]
+
+" Load order for runtime files
+set runtimepath=$VIM,$VIMRUNTIME,$VIMDIR,$VIMAFTER,$FZFDIR
+
+" Make sure all required directories exist
+for path in dirlist
+	if !isdirectory(path)
+		call mkdir(path, "p", 0700)
+	endif
+endfor
 
 " Plugin configuration
-if empty(glob($XDG_CONFIG_HOME.'/vim/autoload/plug.vim'))
-	silent !curl -fLo "$XDG_CONFIG_HOME/vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob($XDG_CONFIG_HOME.'vim/autoload/plug.vim'))
+	silent !curl -fLo "$XDG_CONFIG_HOME"vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 else
 	call plug#begin($PLUGDIR)
@@ -38,6 +45,8 @@ else
 	Plug 'godlygeek/tabular'
 	Plug 'vim-airline/vim-airline'
 	Plug 'scrooloose/nerdtree'
+	Plug '/usr/share/vim/vimfiles/fzf.vim'
+	Plug 'junegunn/fzf.vim'
 
 	" Themes
 	Plug 'altercation/vim-colors-solarized'
@@ -60,7 +69,6 @@ let g:vim_markdown_folding_disabled = 1
 
 " Enable persistent undo if supported
 if has('persistent_undo')
-	set undodir=$XDG_CACHE_HOME"/vim/undo"
 	set undofile
 endif
 
