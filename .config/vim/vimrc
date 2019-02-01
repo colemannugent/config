@@ -130,6 +130,9 @@ set shiftwidth=8
 " Save the file, even if I am still pressing shift
 command W w
 
+" Map ; to open fzf
+map ; :Files<Enter>
+
 " Map <Leader>w to write the current buffer
 noremap <Leader>w :write<Enter>
 
