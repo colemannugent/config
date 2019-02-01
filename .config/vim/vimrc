@@ -62,7 +62,7 @@ if has('persistent_undo')
 	set undofile
 endif
 
-" Now we can turn our filetype functionality back on
+" Enable loading of plugins based on filetype
 filetype plugin indent on
 
 " Enable solarized color scheme
