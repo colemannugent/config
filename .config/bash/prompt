@@ -14,7 +14,7 @@ elif [ "$HOSTNAME" == "coleman-tower" ]; then
 	HOST_COLOR=$FG_CYAN
 elif [ "$HOSTNAME" == "coleman-laptop" ]; then
 	HOST_COLOR=$FG_GREEN
-elif [ "$HOSTNAME" == "hydrogen" ]; then
+elif [ "$HOSTNAME" == "gold" ]; then
 	HOST_COLOR=$FG_YELLOW
 elif [ "$HOSTNAME" == "nickel" ]; then
 	HOST_COLOR=$FG_PURPLE
