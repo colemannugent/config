@@ -20,6 +20,16 @@ alias gc='git commit --verbose'
 alias gd='git diff'
 alias gs='git status'
 
+# Docker
+alias d='docker'
+alias db='docker build'
+alias de='docker exec -it'
+alias dp='docker pull'
+alias dspa='docker system prune -a'
+alias dc='docker-compose'
+alias dcb='dc build'
+alias dcu='dc up'
+
 # Directory related shortcuts
 alias ..='cd ..'
 alias mkdir='mkdir -pv'
