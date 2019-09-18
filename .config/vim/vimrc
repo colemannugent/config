@@ -47,6 +47,7 @@ else
 	Plug 'scrooloose/nerdtree'
 	Plug '/usr/share/vim/vimfiles/fzf.vim'
 	Plug 'junegunn/fzf.vim'
+	Plug 'airblade/vim-gitgutter'
 
 	" Themes
 	Plug 'altercation/vim-colors-solarized'
