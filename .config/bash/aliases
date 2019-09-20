@@ -9,6 +9,7 @@ alias search='sudo apt-cache search'
 
 # ViM
 alias v='vim'
+alias vf='v $(fzf)'
 alias sv='svim'
 alias svim='sudoedit'
 alias note='vim "$(date +"%A, %B %e %Y")".md'
