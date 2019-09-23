@@ -48,6 +48,7 @@ else
 	Plug '/usr/share/vim/vimfiles/fzf.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'airblade/vim-gitgutter'
+	Plug 'w0rp/ale'
 
 	" Themes
 	Plug 'altercation/vim-colors-solarized'
@@ -59,6 +60,7 @@ else
 	Plug 'othree/html5.vim'
 	Plug 'hail2u/vim-css3-syntax'
 	Plug 'cakebaker/scss-syntax.vim'
+	Plug 'chr4/nginx.vim'
 	call plug#end()
 endif
 
