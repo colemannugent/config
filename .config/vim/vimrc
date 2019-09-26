@@ -49,6 +49,7 @@ else
 	Plug 'junegunn/fzf.vim'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'w0rp/ale'
+	Plug 'jremmen/vim-ripgrep'
 
 	" Themes
 	Plug 'altercation/vim-colors-solarized'
@@ -61,6 +62,7 @@ else
 	Plug 'hail2u/vim-css3-syntax'
 	Plug 'cakebaker/scss-syntax.vim'
 	Plug 'chr4/nginx.vim'
+	Plug 'tpope/vim-rails'
 	call plug#end()
 endif
 
@@ -130,6 +132,9 @@ set softtabstop=0
 set noexpandtab
 set shiftwidth=8
 
+" Don't open new tabs if one already exists for a buffer
+set switchbuf=usetab
+
 " Save the file, even if I am still pressing shift
 command W w
 
@@ -165,3 +170,6 @@ noremap <Leader>d i##<Esc>:r!date<CR>kJ
 
 " Map <Leader>n to open NerdTree
 noremap <Leader>n :NERDTreeToggle<CR>
+
+" Map <Leader>c to open the tag under the cursor in a new tab
+noremap <Leader>c <C-w>]<C-w>T
