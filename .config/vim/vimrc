@@ -63,6 +63,7 @@ else
 	Plug 'cakebaker/scss-syntax.vim'
 	Plug 'chr4/nginx.vim'
 	Plug 'tpope/vim-rails'
+	Plug 'dag/vim-fish'
 	call plug#end()
 endif
 
