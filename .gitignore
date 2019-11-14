@@ -1,2 +1,12 @@
-*
-.vim/*
+*/*
+*.*
+!.config/
+!.config/bash/
+!.config/bash/*
+!.config/vim/
+!.config/vim/*
+.config/vim/plugged
+!.config/vim/*/*
+!.config/fish/
+!.config/fish/*
+!.config/fish/functions/*
