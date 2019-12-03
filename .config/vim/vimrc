@@ -33,6 +33,9 @@ for path in dirlist
 	endif
 endfor
 
+" Detect OS
+let os = system('uname')
+
 " Plugin configuration
 if empty(glob($XDG_CONFIG_HOME.'vim/autoload/plug.vim'))
 	silent !curl -fLo "$XDG_CONFIG_HOME"vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -90,6 +93,11 @@ colorscheme solarized
 " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
 if &term =~ '256color'
 	set t_ut=
+endif
+
+" Fix the delete key on OSX
+if os == "Darwin"
+	set backspace=indent,eol,start
 endif
 
 " Enable relative line numbering

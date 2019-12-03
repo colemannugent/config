@@ -62,6 +62,12 @@ alias dc "docker-compose"
 alias dcb "dc build"
 alias dcu "dc up"
 
+# Use GNU utilities on OSX
+if test (uname) = "Darwin"
+	alias ls "gls"
+	alias rm "grm"
+end
+
 # Directory related shortcuts
 alias .. "cd .."
 alias mkdir "mkdir -pv"
