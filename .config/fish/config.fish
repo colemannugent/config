@@ -50,7 +50,7 @@ alias ga "git add"
 alias gc "git commit --verbose"
 alias gd "git diff"
 alias gs "git status"
-alias gte "git log --oneline --since=yesterday --pretty=format:\"- %s\""
+alias gte "git log --oneline --since=12hours --pretty=format:\"- %s\""
 
 # Docker
 alias d "docker"
