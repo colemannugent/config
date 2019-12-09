@@ -34,7 +34,7 @@ for path in dirlist
 endfor
 
 " Detect OS
-let os = system('uname')
+let os = systemlist('uname')[0]
 
 " Plugin configuration
 if empty(glob($XDG_CONFIG_HOME.'vim/autoload/plug.vim'))
