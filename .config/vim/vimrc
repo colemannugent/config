@@ -67,6 +67,7 @@ else
 	Plug 'chr4/nginx.vim'
 	Plug 'tpope/vim-rails'
 	Plug 'dag/vim-fish'
+	Plug 'cespare/vim-toml'
 	call plug#end()
 endif
 
