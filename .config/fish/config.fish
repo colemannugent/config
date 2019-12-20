@@ -44,6 +44,9 @@ alias sv "svim"
 alias svim "sudoedit"
 alias note "vim \"(date +\"%A, %B %e %Y\")\".md"
 
+# Ranger
+alias r "ranger"
+
 # Git
 alias gl "git log --color --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an %GK> %Creset\" --abbrev-commit"
 alias ga "git add"
@@ -61,6 +64,11 @@ alias dspa "docker system prune -a"
 alias dc "docker-compose"
 alias dcb "dc build"
 alias dcu "dc up"
+
+# Systemd
+alias sc "systemctl"
+alias ssc "sudo systemctl"
+alias jc "journalctl"
 
 # Use GNU utilities on OSX
 if test (uname) = "Darwin"
