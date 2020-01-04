@@ -65,6 +65,9 @@ alias dc "docker-compose"
 alias dcb "dc build"
 alias dcu "dc up"
 
+# GlobalProtect
+alias gp "globalprotect"
+
 # Systemd
 alias sc "systemctl"
 alias ssc "sudo systemctl"
