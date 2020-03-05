@@ -27,6 +27,9 @@ set -x XDG_DATA_HOME $HOME'/.local/share'
 # Tell GPG where it is
 set -x GNUPGHOME "$XDG_CONFIG_HOME"gnupg
 
+# Add cargo to PATH
+set -gx PATH ~/.cargo/bin $PATH
+
 # apt-get and aptitude
 alias uu "sudo apt update && sudo apt upgrade -y"
 alias ai "sudo apt install"
