@@ -4,11 +4,8 @@ if not status --is-interactive
 end
 
 # Set default editor to vim
-export EDITOR=/usr/bin/vim
-export VISUAL=$EDITOR
-
-# Set some real ls colors
-# export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+set -x EDITOR /usr/bin/vim
+set -x VISUAL $EDITOR
 
 # Add colors to ls and friends
 if test -e /usr/bin/dircolors -a -e ~/.config/dircolors
@@ -20,15 +17,15 @@ if test -e /usr/bin/dircolors -a -e ~/.config/dircolors
 end
 
 # Make vim know where everything is
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+set -x VIMINIT 'let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # Set XDG variables
-export XDG_CONFIG_HOME=$HOME'/.config/'
-export XDG_CACHE_HOME=$HOME'/.cache/'
-export XDG_DATA_HOME=$HOME'/.local/share'
+set -x XDG_CONFIG_HOME $HOME'/.config/'
+set -x XDG_CACHE_HOME $HOME'/.cache/'
+set -x XDG_DATA_HOME $HOME'/.local/share'
 
 # Tell GPG where it is
-export GNUPGHOME="$XDG_CONFIG_HOME"gnupg
+set -x GNUPGHOME "$XDG_CONFIG_HOME"gnupg
 
 # apt-get and aptitude
 alias uu "sudo apt update && sudo apt upgrade -y"
