@@ -31,11 +31,12 @@ export XDG_DATA_HOME=$HOME'/.local/share'
 export GNUPGHOME="$XDG_CONFIG_HOME"gnupg
 
 # apt-get and aptitude
-alias upandup "sudo apt update && sudo apt upgrade -y"
-alias install "sudo apt install"
-alias remove "sudo apt remove"
-alias autoremove "sudo apt-get autoremove"
-alias search "sudo apt-cache search"
+alias uu "sudo apt update && sudo apt upgrade -y"
+alias ai "sudo apt install"
+alias alu "sudo apt list --upgradeable"
+alias ar "sudo apt remove"
+alias aar "sudo apt-get autoremove"
+alias acs "sudo apt-cache search"
 
 # ViM
 alias v "vim -p"
