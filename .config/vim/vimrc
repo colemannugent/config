@@ -1,24 +1,24 @@
 set nocompatible
 
 " Location of the swapfiles
-let $SWAPDIR=$XDG_CACHE_HOME."vim/swap//"
+let $SWAPDIR=$XDG_CACHE_HOME."/vim/swap//"
 set directory=$SWAPDIR
 
 " The directory to use with :set backup=on
-let $BACKUPDIR=$XDG_CACHE_HOME."vim/backup"
+let $BACKUPDIR=$XDG_CACHE_HOME."/vim/backup"
 set backupdir=$BACKUPDIR
 
 " Location to save vim state to
-let &viminfofile=$XDG_CACHE_HOME."vim/viminfo"
+let &viminfofile=$XDG_CACHE_HOME."/vim/viminfo"
 
 " Various paths used in the runtimepath
-let $VIMDIR   = $XDG_CONFIG_HOME."vim/"
-let $VIMAFTER = $XDG_CONFIG_HOME."vim/after/"
+let $VIMDIR   = $XDG_CONFIG_HOME."/vim/"
+let $VIMAFTER = $XDG_CONFIG_HOME."/vim/after/"
 let $FZFDIR   = "/usr/share/vim/vimfiles/"
-let $PLUGDIR  = $XDG_CONFIG_HOME."vim/plugged"
+let $PLUGDIR  = $XDG_CONFIG_HOME."/vim/plugged"
 
 " Directory to save persistent undo state to
-let $UNDODIR=$XDG_CACHE_HOME."vim/undo"
+let $UNDODIR=$XDG_CACHE_HOME."/vim/undo"
 set undodir=$UNDODIR
 
 let dirlist = [$BACKUPDIR, $PLUGDIR, $SWAPDIR, $UNDODIR]
@@ -37,8 +37,8 @@ endfor
 let os = systemlist('uname')[0]
 
 " Plugin configuration
-if empty(glob($XDG_CONFIG_HOME.'vim/autoload/plug.vim'))
-	silent !curl -fLo "$XDG_CONFIG_HOME"vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob($XDG_CONFIG_HOME.'/vim/autoload/plug.vim'))
+	silent !curl -fLo "$XDG_CONFIG_HOME"/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 else
 	call plug#begin($PLUGDIR)
