@@ -20,8 +20,8 @@ end
 set -x VIMINIT 'let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # Set XDG variables
-set -x XDG_CONFIG_HOME $HOME'/.config/'
-set -x XDG_CACHE_HOME $HOME'/.cache/'
+set -x XDG_CONFIG_HOME $HOME'/.config'
+set -x XDG_CACHE_HOME $HOME'/.cache'
 set -x XDG_DATA_HOME $HOME'/.local/share'
 
 # Tell GPG where it is
