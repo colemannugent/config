@@ -74,6 +74,9 @@ alias sc "systemctl"
 alias ssc "sudo systemctl"
 alias jc "journalctl"
 
+# Fix Tmux not respecting XDG_CONFIG
+alias tmux "tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
+
 # Use GNU utilities on OSX
 if test (uname) = "Darwin"
 	alias ls "gls"
