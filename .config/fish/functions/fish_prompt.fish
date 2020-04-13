@@ -15,5 +15,9 @@ function fish_prompt --description 'Write out the prompt'
             set suffix '$'
     end
 
+    if set -q VIM
+	    set suffix " [v] " $suffix
+    end
+
     echo -n -s (set_color "cyan") "$USER" (set_color normal) @ (prompt_hostname) ' ' (set_color $color_cwd) (prompt_pwd) (set_color normal) " $suffix "
 end
