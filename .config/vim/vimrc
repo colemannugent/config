@@ -142,6 +142,9 @@ set softtabstop=0
 set noexpandtab
 set shiftwidth=8
 
+" Fix indentation in YAML files
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 " Don't open new tabs if one already exists for a buffer
 set switchbuf=usetab
 
