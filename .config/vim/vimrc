@@ -45,14 +45,17 @@ else
 	" Productivity
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-endwise'
 	Plug 'godlygeek/tabular'
 	Plug 'vim-airline/vim-airline'
 	Plug 'scrooloose/nerdtree'
+	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug '/usr/share/vim/vimfiles/fzf.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'w0rp/ale'
 	Plug 'jremmen/vim-ripgrep'
+	Plug 'raimondi/delimitmate'
 
 	" Themes
 	Plug 'altercation/vim-colors-solarized'
