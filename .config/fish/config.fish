@@ -24,14 +24,18 @@ set -x XDG_CONFIG_HOME $HOME'/.config'
 set -x XDG_CACHE_HOME $HOME'/.cache'
 set -x XDG_DATA_HOME $HOME'/.local/share'
 
-# Tell GPG where it is
-set -x GNUPGHOME "$XDG_CONFIG_HOME"gnupg
+# Setup asdf
+set -x ASDF_CONFIG_FILE "$XDG_CONFIG_HOME/asdf/asdfrc"
+set -x ASDF_DATA_DIR "$XDG_DATA_HOME/asdf"
+set -x ASDF_GEM_DEFAULT_PACKAGES_FILE "$XDG_DATA_HOME/gem/default-gems"
+source "$XDG_CONFIG_HOME/asdf/asdf.fish"
 
-# Add cargo to PATH
-set -gx PATH ~/.cargo/bin $PATH
+# Setup GOPATH and add go bin to PATH
+set -x GOPATH ~/src/go
+set -gx PATH ~/src/go/bin $PATH
 
 # apt-get and aptitude
-alias uu "sudo apt update && sudo apt upgrade -y"
+alias uu "sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
 alias ai "sudo apt install"
 alias alu "sudo apt list --upgradeable"
 alias ar "sudo apt remove"
@@ -44,6 +48,9 @@ alias vf "v (fzf)"
 alias sv "svim"
 alias svim "sudoedit"
 alias note "vim \"(date +\"%A, %B %e %Y\")\".md"
+
+# VSCode
+alias c "code"
 
 # Ranger
 alias r "ranger"
@@ -63,6 +70,7 @@ alias de "docker exec -it"
 alias dp "docker pull"
 alias dspa "docker system prune -a"
 alias dc "docker-compose"
+alias dm "docker-machine"
 alias dcb "dc build"
 alias dcu "dc up"
 
@@ -72,7 +80,9 @@ alias gp "globalprotect"
 # Systemd
 alias sc "systemctl"
 alias ssc "sudo systemctl"
+alias scu "systemctl --user"
 alias jc "journalctl"
+alias jcu "journalctl --user"
 
 # Fix Tmux not respecting XDG_CONFIG
 alias tmux "tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
