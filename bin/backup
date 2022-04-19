@@ -1,18 +1,17 @@
 #!/bin/bash
-#### Backup script ####
 
-#Change directory to the backup directory
-cd /backup/
+# Backup syncthing
+/usr/bin/rclone sync /storage/syncthing gdrive_crypt:syncthing \
+	--config /home/coleman/.config/rclone/rclone.conf \
+	--fast-list --transfers=40 --checkers=40 --tpslimit=10 --drive-chunk-size=1M --drive-use-trash=false
 
-## Variables ##
-VERSION="0.0.1"
+# Backup Docker volumes
+/usr/bin/rclone sync /home/coleman/src/homelab gdrive_crypt:docker \
+	--config /home/coleman/.config/rclone/rclone.conf \
+	--exclude "/plex/**" \
+	--fast-list --transfers=40 --checkers=40 --tpslimit=10 --drive-chunk-size=1M --drive-use-trash=false
 
-#Print version info
-echo "["$(date +"%D %T")"] [INFO] Backup script version $VERSION (last modified on $(date +%D -r $(dirname $0))) started..."
-
-#Check if not running as root, and take appropriate actions
-if [ $(id -u) != "root" ]; then
-	echo "["$(date +"%D %T")"] [ERROR] You are not running as root, this script requires superuser priviledes to backup system files. Re-run this script as root!"
-fi
-
-
+# Backup important documents
+/usr/bin/rclone sync /storage/share/Documents gdrive_crypt:important-documents \
+	--config /home/coleman/.config/rclone/rclone.conf \
+	--fast-list --transfers=40 --checkers=40 --tpslimit=10 --drive-chunk-size=1M --drive-use-trash=false
