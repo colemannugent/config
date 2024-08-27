@@ -3,8 +3,19 @@ if not status --is-interactive
 	exit # Skips the rest of this file, not exiting the shell
 end
 
-# Set default editor to vim
-set -x EDITOR /usr/bin/vim
+# Set XDG variables
+set -x XDG_CONFIG_HOME $HOME'/.config'
+set -x XDG_CACHE_HOME $HOME'/.cache'
+set -x XDG_DATA_HOME $HOME'/.local/share'
+
+# Setup asdf
+set -x ASDF_CONFIG_FILE "$XDG_CONFIG_HOME/asdf/asdfrc"
+set -x ASDF_DATA_DIR "$XDG_DATA_HOME/asdf"
+set -x ASDF_GEM_DEFAULT_PACKAGES_FILE "$XDG_DATA_HOME/gem/default-gems"
+source "$XDG_CONFIG_HOME/asdf/asdf.fish"
+
+# Set default editor to nvim
+set -x EDITOR (which nvim)
 set -x VISUAL $EDITOR
 
 # Add colors to ls and friends
@@ -17,22 +28,17 @@ if test -e /usr/bin/dircolors -a -e ~/.config/dircolors
 end
 
 # Make vim know where everything is
-set -x VIMINIT 'let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
-
-# Set XDG variables
-set -x XDG_CONFIG_HOME $HOME'/.config'
-set -x XDG_CACHE_HOME $HOME'/.cache'
-set -x XDG_DATA_HOME $HOME'/.local/share'
-
-# Setup asdf
-set -x ASDF_CONFIG_FILE "$XDG_CONFIG_HOME/asdf/asdfrc"
-set -x ASDF_DATA_DIR "$XDG_DATA_HOME/asdf"
-set -x ASDF_GEM_DEFAULT_PACKAGES_FILE "$XDG_DATA_HOME/gem/default-gems"
-source "$XDG_CONFIG_HOME/asdf/asdf.fish"
+# set -x VIMINIT 'let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # Setup GOPATH and add go bin to PATH
 set -x GOPATH ~/src/go
 set -gx PATH ~/src/go/bin $PATH
+
+# Add Cargo bin to path
+set -gx PATH ~/.cargo/bin $PATH
+
+# Make SSH use 1Password
+# set -x SSH_AUTH_SOCK ~/.1password/agent.sock
 
 # apt-get and aptitude
 alias uu "sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
@@ -42,12 +48,11 @@ alias ar "sudo apt remove"
 alias aar "sudo apt-get autoremove"
 alias acs "sudo apt-cache search"
 
-# ViM
-alias v "vim -p"
-alias vf "v (fzf)"
-alias sv "svim"
-alias svim "sudoedit"
-alias note "vim \"(date +\"%A, %B %e %Y\")\".md"
+# Editor shortcuts
+alias v "$EDITOR -p"
+alias vf "$EDITOR (fzf)"
+alias sv "sudoedit"
+alias note "$EDITOR \"(date +\"%A, %B %e %Y\")\".md"
 
 # VSCode
 alias c "code"
@@ -69,8 +74,7 @@ alias db "docker build"
 alias de "docker exec -it"
 alias dp "docker pull"
 alias dspa "docker system prune -a"
-alias dc "docker-compose"
-alias dm "docker-machine"
+alias dc "docker compose"
 alias dcb "dc build"
 alias dcu "dc up"
 
