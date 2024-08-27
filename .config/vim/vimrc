@@ -9,7 +9,9 @@ let $BACKUPDIR=$XDG_CACHE_HOME."/vim/backup"
 set backupdir=$BACKUPDIR
 
 " Location to save vim state to
-let &viminfofile=$XDG_CACHE_HOME."/vim/viminfo"
+if !has('nvim')
+	let &viminfofile=$XDG_CACHE_HOME."/vim/viminfo"
+endif
 
 " Various paths used in the runtimepath
 let $VIMDIR   = $XDG_CONFIG_HOME."/vim/"
@@ -58,7 +60,7 @@ else
 	Plug 'raimondi/delimitmate'
 
 	" Themes
-	Plug 'altercation/vim-colors-solarized'
+	" Plug 'altercation/vim-colors-solarized'
 	Plug 'vim-airline/vim-airline-themes'
 
 	" Language support
@@ -71,6 +73,8 @@ else
 	Plug 'tpope/vim-rails'
 	Plug 'dag/vim-fish'
 	Plug 'cespare/vim-toml'
+	Plug 'google/vim-jsonnet'
+	Plug 'rust-lang/rust.vim'
 	call plug#end()
 endif
 
@@ -89,8 +93,8 @@ endif
 filetype plugin indent on
 
 " Enable solarized color scheme
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 
 " Disable Background Color Erase (BCE) so that color schemes
 " render properly when inside 256-color tmux and GNU screen.
