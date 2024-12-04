@@ -66,6 +66,7 @@ alias ga "git add"
 alias gc "git commit --verbose"
 alias gd "git diff"
 alias gs "git status"
+alias grc "git rebase --continue"
 alias gte "git log --oneline --since=12hours --pretty=format:\"- %s\""
 
 # Docker
