@@ -133,6 +133,14 @@ local plugins = {
       },
     },
   },
+  { 'dense-analysis/ale', 
+    config = function()
+      local g = vim.g
+      g.ale_linters = {
+        markdown = { },
+      }
+    end
+  },
   {
     "folke/todo-comments.nvim", -- Adds nice highlights to special comments
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -142,6 +150,7 @@ local plugins = {
   {'nvim-lualine/lualine.nvim'}, -- Nice little status line plugin
   {'lukas-reineke/lsp-format.nvim'}, -- Simple way to get the LSPs to format their respective languages
   {'lewis6991/gitsigns.nvim'}, -- Adds nice inline git markers to show edits
+  {'akinsho/git-conflict.nvim', version = "*", config = true}, -- Adds shortcuts for quickly picking git conflicts
 }
 
 require("lazy").setup(plugins)
@@ -152,6 +161,9 @@ local servers = {
   ruby_lsp = {},
   cssls = {},
   tailwindcss = {},
+  html = {},
+  rubocop = {},
+  eslint = {},
 }
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
@@ -198,6 +210,29 @@ cmp.setup({
   })
 })
 
+local builtin = require('telescope.builtin')
+
+-- Custom function to ignore the gitignore in certain dirs
+function MyFindFiles()
+  local cwd = vim.fn.getcwd()
+  local dirs_to_ignore_gitignore = {
+    '/home/coleman/Drive/Notes',
+  }
+
+  local ignore_gitignore = false
+  for _, dir in ipairs(dirs_to_ignore_gitignore) do
+    if cwd == dir then
+      ignore_gitignore = true
+      break
+    end
+  end
+
+  if ignore_gitignore then
+    builtin.find_files({ no_ignore_parent = true })
+  else
+    builtin.find_files()
+  end
+end
 
 require('lualine').setup()
 require('gitsigns').setup()
@@ -212,7 +247,7 @@ wk.add({
   { "<Leader>q", ":wq<CR>", desc = "Save and Quit" },
   { "<Leader>j", ":bnext<CR>", desc = "Next Buffer" },
   { "<Leader>k", ":bprevious<CR>", desc = "Previous Buffer" },
-  { "<Leader>ff", ":Telescope find_files<CR>", desc = "Find Files" },
+  { "<Leader>ff", "<cmd>lua MyFindFiles()<CR>", desc = "Find Files" },
   { "<Leader>fg", ":Telescope live_grep<CR>", desc = "Live Grep" },
   { "<Leader>fb", ":Telescope buffers<CR>", desc = "Find Buffers" },
   { "<Leader>gn", ":GpChatNew", desc = "Open new LLM chat" },
@@ -223,5 +258,7 @@ wk.add({
     mode = {'i'},
     {"jk", "<Esc>", desc = "Exit Insert Mode"},
     {"kj", "<Esc>", desc = "Exit Insert Mode"},
+    {"<C-l>", '<C-r>=strftime("%Y-%m-%d %H:%M")<CR>', desc = "Insert date and timestamp"},
+    {"<C-e>", '<C-r>=strftime("@ %H:%M:%S")<CR>', desc = "Insert timestamp"},
   }
 })
