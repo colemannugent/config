@@ -6,3 +6,8 @@
 !.config/fish/
 !.config/fish/*
 !.config/fish/functions/*
+!.config/nvim/
+!.config/nvim/*
+.config/nvim/lazy-lock.json
+!.config/tmux/
+!.config/tmux/*
