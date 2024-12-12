@@ -10,6 +10,7 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.undofile = true
 
 -- Setup leader and localleader
 vim.g.mapleader = " "
@@ -30,7 +31,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath) 
 
 local plugins = {
   {
@@ -74,6 +75,13 @@ local plugins = {
         require("copilot").setup({
           suggestion = { enabled = false },
           panel = { enabled = false },
+          server_opts_overrides = {
+            settings = {
+              advanced = {
+                inlineSuggestCount = 3
+              },
+            }
+          }
         })
       end,
     },
@@ -207,7 +215,10 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'copilot' },
     { name = 'buffer' },
-  })
+  }),
+  experimental = {
+    ghost_text = true,
+  },
 })
 
 local builtin = require('telescope.builtin')
@@ -239,6 +250,7 @@ require('gitsigns').setup()
 require('todo-comments').setup()
 
 local wk = require("which-key")
+local gitsigns = require("gitsigns")
 
 wk.add({
   { "<F7>", ":tabp<CR>", desc = "Previous Tab" },
@@ -250,15 +262,27 @@ wk.add({
   { "<Leader>ff", "<cmd>lua MyFindFiles()<CR>", desc = "Find Files" },
   { "<Leader>fg", ":Telescope live_grep<CR>", desc = "Live Grep" },
   { "<Leader>fb", ":Telescope buffers<CR>", desc = "Find Buffers" },
-  { "<Leader>gn", ":GpChatNew", desc = "Open new LLM chat" },
-  { "<Leader>gp", ":GpChatPaste", desc = "Paste selection into latest chat" },
-  { "<Leader>gf", ":GpChatFinder", desc = "Search through LLM chats" },
-  { "<Leader>gr", ":GpChatRewrite", desc = "Rewrite the current selection with the active LLM" },
+  { "<Leader>c", group = 'GP Chat'},
+  { "<Leader>cn", ":GpChatNew", desc = "Open new LLM chat" },
+  { "<Leader>cp", ":GpChatPaste", desc = "Paste selection into latest chat" },
+  { "<Leader>cf", ":GpChatFinder", desc = "Search through LLM chats" },
+  { "<Leader>cr", ":GpChatRewrite", desc = "Rewrite the current selection with the active LLM" },
+  { "<Leader>g", group = 'Git'},
+  { "<Leader>gs", gitsigns.stage_hunk,      desc = "Stage hunk" },
+  { "<Leader>gS", gitsigns.stage_buffer,    desc = "Stage buffer" },
+  { "<Leader>gr", gitsigns.reset_hunk,      desc = "Un-stage hunk" },
+  { "<Leader>gR", gitsigns.reset_buffer,    desc = "Un-stage buffer" },
+  { "<Leader>gu", gitsigns.undo_stage_hunk, desc = "Undo stage hunk" },
   {
     mode = {'i'},
     {"jk", "<Esc>", desc = "Exit Insert Mode"},
     {"kj", "<Esc>", desc = "Exit Insert Mode"},
     {"<C-l>", '<C-r>=strftime("%Y-%m-%d %H:%M")<CR>', desc = "Insert date and timestamp"},
     {"<C-e>", '<C-r>=strftime("@ %H:%M:%S")<CR>', desc = "Insert timestamp"},
+  },
+  {
+    mode = {'v'},
+    {'<Leader>gs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end},
+    {'<Leader>gr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end}
   }
 })
