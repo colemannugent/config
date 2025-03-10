@@ -19,6 +19,7 @@ end
 
 # Setup path
 set -gx --prepend PATH $HOME/.asdf/shims $PATH
+set -gx PATH /opt/homebrew/bin $PATH
 set -gx GOPATH $HOME/src/go
 set -gx PATH $HOME/src/go/bin $PATH
 set -gx PATH $HOME/.cargo/bin $PATH
