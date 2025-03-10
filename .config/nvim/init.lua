@@ -11,6 +11,7 @@ vim.opt.shiftwidth = 2
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.undofile = true
+vim.opt.laststatus = 3 -- Used to hide statusline for all but main windows
 
 -- Setup leader and localleader
 vim.g.mapleader = " "
@@ -96,19 +97,6 @@ local plugins = {
     },
   },
   {
-    "robitx/gp.nvim", -- Wraps various LLMs in a nice chat interface
-    config = function()
-      require("gp").setup({
-        providers = {
-          copilot = {
-            endpoint = "https://api.githubcopilot.com/chat/completions",
-            secret = { "bash", "-c", "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'" },
-          }
-        }
-      })
-    end,
-  },
-  {
     "nvim-treesitter/nvim-treesitter", -- Used for syntax awareness in most plugins
     build = ":TSUpdate",
     config = function () 
@@ -148,6 +136,43 @@ local plugins = {
         markdown = { },
       }
     end
+  },
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+    opts = {
+      -- add any opts here
+      -- for example
+      provider = "copilot",
+      file_selector = {
+        provider = "native",
+      },
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
   },
   {
     "folke/todo-comments.nvim", -- Adds nice highlights to special comments
@@ -262,11 +287,7 @@ wk.add({
   { "<Leader>ff", "<cmd>lua MyFindFiles()<CR>", desc = "Find Files" },
   { "<Leader>fg", ":Telescope live_grep<CR>", desc = "Live Grep" },
   { "<Leader>fb", ":Telescope buffers<CR>", desc = "Find Buffers" },
-  { "<Leader>c", group = 'GP Chat'},
-  { "<Leader>cn", ":GpChatNew", desc = "Open new LLM chat" },
-  { "<Leader>cp", ":GpChatPaste", desc = "Paste selection into latest chat" },
-  { "<Leader>cf", ":GpChatFinder", desc = "Search through LLM chats" },
-  { "<Leader>cr", ":GpChatRewrite", desc = "Rewrite the current selection with the active LLM" },
+  { "<Leader>fw", ":Telescope grep_string<CR>", desc = "Search string" },
   { "<Leader>g", group = 'Git'},
   { "<Leader>gs", gitsigns.stage_hunk,      desc = "Stage hunk" },
   { "<Leader>gS", gitsigns.stage_buffer,    desc = "Stage buffer" },
@@ -286,3 +307,5 @@ wk.add({
     {'<Leader>gr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end}
   }
 })
+
+require("plugins.avante")
