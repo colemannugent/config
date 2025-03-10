@@ -47,9 +47,6 @@ abbr -a scu "systemctl --user"
 abbr -a jc "journalctl"
 abbr -a jcu "journalctl --user"
 
-# Fix Tmux not respecting XDG_CONFIG
-alias tmux "tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
-
 # Use GNU utilities on OSX
 if test (uname) = "Darwin"
 	abbr -a ls "gls"
