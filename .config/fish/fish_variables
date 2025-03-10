@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export EDITOR:nvim
 SETUVAR --export LESS_TERMCAP_md:\x1b\x5b01\x3b31m
 SETUVAR --export LESS_TERMCAP_me:\x1b\x5b0m
 SETUVAR --export LESS_TERMCAP_se:\x1b\x5b0m
@@ -8,6 +9,7 @@ SETUVAR --export LESS_TERMCAP_ue:\x1b\x5b0m
 SETUVAR --export LESS_TERMCAP_us:\x1b\x5b01\x3b32m
 SETUVAR --export LSCOLORS:gxfxbEaEBxxEhEhBaDaCaD
 SETUVAR --export TERM:alacritty
+SETUVAR --export VISUAL:nvim
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d

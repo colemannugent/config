@@ -7,7 +7,7 @@ abbr -a aar "sudo apt-get autoremove"
 abbr -a acs "sudo apt-cache search"
 
 # Editor shortcuts
-alias v "$EDITOR -p"
+alias v="$EDITOR -p"
 abbr -a vf "v (fzf)"
 abbr -a sv "sudoedit"
 abbr -a note "v \"(date +\"%A, %B %e %Y\")\".md"
@@ -59,7 +59,7 @@ end
 # Directory related shortcuts
 abbr -a .. "cd .."
 abbr -a mkdir "mkdir -pv"
-abbr -a l "ls -lah --color=auto"
+alias l="ls -lah --color=auto"
 
 # Safety Checks (aka, always prompt for confirmation)
 abbr -a mv "mv -i -v"
