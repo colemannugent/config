@@ -6,8 +6,11 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.autoindent = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
+vim.opt.autoread = true
+vim.opt.expandtab = false
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 8
+vim.opt.softtabstop = 0
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.undofile = true
@@ -16,6 +19,29 @@ vim.opt.laststatus = 3 -- Used to hide statusline for all but main windows
 -- Setup leader and localleader
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
+vim.diagnostic.config({
+  virtual_text = false,
+})
+
+-- Periodically check for file changes
+vim.api.nvim_create_autocmd({"FocusGained", "BufEnter"}, {
+  pattern = "*",
+  command = "checktime",
+})
+
+-- Alert me when a file has changed on disk
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  pattern = "*",
+  callback = function(ev)
+    -- ev.match contains the filename
+    vim.notify(
+      "⚠️ File changed on disk, buffer reloaded: " .. ev.match,
+      vim.log.levels.WARN,
+      { title = "Neovim" }
+    )
+  end,
+})
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -129,51 +155,6 @@ local plugins = {
       },
     },
   },
-  { 'dense-analysis/ale', 
-    config = function()
-      local g = vim.g
-      g.ale_linters = {
-        markdown = { },
-      }
-    end
-  },
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-    opts = {
-      -- add any opts here
-      -- for example
-      provider = "copilot",
-      file_selector = {
-        provider = "native",
-      },
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua", -- for file_selector provider fzf
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
-    },
-  },
   {
     "folke/todo-comments.nvim", -- Adds nice highlights to special comments
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -184,22 +165,19 @@ local plugins = {
   {'lukas-reineke/lsp-format.nvim'}, -- Simple way to get the LSPs to format their respective languages
   {'lewis6991/gitsigns.nvim'}, -- Adds nice inline git markers to show edits
   {'akinsho/git-conflict.nvim', version = "*", config = true}, -- Adds shortcuts for quickly picking git conflicts
+  {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim', config = function()
+      require('lsp_lines').setup()
+    end,
+  },
 }
 
 require("lazy").setup(plugins)
 
 -- Tell Mason which LSPs to autoinstall
-local mason_lspconfig = require("mason-lspconfig")
-local servers = {
-  ruby_lsp = {},
-  cssls = {},
-  tailwindcss = {},
-  html = {},
-  rubocop = {},
-  eslint = {},
-}
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
+require("mason").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = { "ruby_lsp", "cssls", "tailwindcss", "html", "eslint"}
 }
 
 -- Setup LSP formatting
@@ -207,19 +185,6 @@ require("lsp-format").setup {}
 local on_attach = function(client, bufnr)
     require("lsp-format").on_attach(client, bufnr)
 end
-
--- Setup LSPs
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require("lspconfig")[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end
-}
 
 -- Setup autocompletion
 local cmp = require('cmp')
@@ -274,8 +239,10 @@ require('lualine').setup()
 require('gitsigns').setup()
 require('todo-comments').setup()
 
+
 local wk = require("which-key")
 local gitsigns = require("gitsigns")
+local lsplines = require("lsp_lines")
 
 wk.add({
   { "<F7>", ":tabp<CR>", desc = "Previous Tab" },
@@ -284,6 +251,7 @@ wk.add({
   { "<Leader>q", ":wq<CR>", desc = "Save and Quit" },
   { "<Leader>j", ":bnext<CR>", desc = "Next Buffer" },
   { "<Leader>k", ":bprevious<CR>", desc = "Previous Buffer" },
+  { "<Leader>l", lsplines.toggle, desc = "Toggle LSP virtual text" },
   { "<Leader>ff", "<cmd>lua MyFindFiles()<CR>", desc = "Find Files" },
   { "<Leader>fg", ":Telescope live_grep<CR>", desc = "Live Grep" },
   { "<Leader>fb", ":Telescope buffers<CR>", desc = "Find Buffers" },
@@ -294,6 +262,9 @@ wk.add({
   { "<Leader>gr", gitsigns.reset_hunk,      desc = "Un-stage hunk" },
   { "<Leader>gR", gitsigns.reset_buffer,    desc = "Un-stage buffer" },
   { "<Leader>gu", gitsigns.undo_stage_hunk, desc = "Undo stage hunk" },
+  { "<Leader>go", ":GitConflictChooseOurs<CR>", desc = "Choose ours" },
+  { "<Leader>gt", ":GitConflictChooseTheirs<CR>", desc = "Choose theirs" },
+  { "<Leader>gn", ":GitConflictNextConflict<CR>", desc = "Jump to next conflict" },
   {
     mode = {'i'},
     {"jk", "<Esc>", desc = "Exit Insert Mode"},
@@ -307,5 +278,3 @@ wk.add({
     {'<Leader>gr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end}
   }
 })
-
-require("plugins.avante")
