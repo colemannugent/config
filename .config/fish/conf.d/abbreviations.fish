@@ -6,11 +6,12 @@ abbr -a ar "sudo apt remove"
 abbr -a aar "sudo apt-get autoremove"
 abbr -a acs "sudo apt-cache search"
 
-# Editor shortcuts
-alias v="$EDITOR -p"
+alias v="nvim -p"
 abbr -a vf "v (fzf)"
+abbr -a ve "open-edits"
 abbr -a sv "sudoedit"
 abbr -a note "v \"(date +\"%A, %B %e %Y\")\".md"
+abbr -a vc "v ~/.config/"
 
 # VSCode
 abbr -a c "code"
@@ -26,6 +27,12 @@ abbr -a gd "git diff"
 abbr -a gs "git status"
 abbr -a grc "git rebase --continue"
 abbr -a gte "git log --oneline --since=12hours --pretty=format:\"- %s\""
+
+# Aider
+abbr -a ai "op run --no-masking aider"
+
+# Mise
+abbr -a m "mise"
 
 # Docker
 abbr -a d "docker"

@@ -1,5 +1,5 @@
 function logwatch
-	set container_name falco-app-1
+	set container_name falco
 	set interval 1
 
 	function on_interrupt --on-signal SIGINT
