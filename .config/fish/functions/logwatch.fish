@@ -11,7 +11,7 @@ function logwatch
 		set container_status (docker ps --filter name=$container_name --format '{{.Names}}')
 
 		if test "$container_status" = "$container_name"
-			docker logs -f $container_name -n 0 | grcat ~/.grc/rails.log
+			docker logs -f $container_name -n 0 2>&1 | grcat ~/.grc/rails.log
 		end
 
 		sleep $interval

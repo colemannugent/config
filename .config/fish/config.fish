@@ -18,7 +18,7 @@ if test -e /usr/bin/dircolors -a -e ~/.config/dircolors
 end
 
 # Enable mise-en-place
-mise activate fish | source
+~/.local/bin/mise activate fish | source
 
 # Setup path
 set -gx PATH /opt/homebrew/bin $PATH
@@ -34,4 +34,6 @@ set -gx EDITOR (which nvim)
 # Setup AI env variables
 set -x OPENROUTER_API_KEY "op://Employee/OpenRouter/Aider Key"
 set -x OPENAI_API_KEY "op://Employee/OpenAI/Aider Key"
+set -x CODEX_GITHUB_PERSONAL_ACCESS_TOKEN "op://Employee/GitHub Codex PAT/credential"
 set -x OLLAMA_API_BASE "http://localhost:11434"
+set -x GRAFANA_SERVICE_ACCOUNT_TOKEN "op://Employee/Grafana Service Account/credential"

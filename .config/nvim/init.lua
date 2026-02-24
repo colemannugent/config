@@ -82,7 +82,7 @@ local plugins = {
     },
   },
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.8', -- Super fast search
+    'nvim-telescope/telescope.nvim', -- Super fast search
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
@@ -125,22 +125,10 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter", -- Used for syntax awareness in most plugins
     build = ":TSUpdate",
-    config = function () 
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "lua", "vim", "vimdoc", "ruby", "diff", "javascript", "html", "css", "dockerfile", "fish", "python", "gitcommit", "gitignore", "go", "ssh_config", "markdown", "markdown_inline" },
-        sync_install = false,
-        highlight = { enable = true },
-        indent = { enable = true },  
-      })
-    end,
+    lazy = false,
   },
   {
-    "RRethy/nvim-treesitter-endwise", -- Smart block completion using treesitter
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        endwise = { enable = true },
-      })
-    end,
+    "RRethy/nvim-treesitter-endwise" -- Smart block completion using treesitter
   },
   {
     "folke/which-key.nvim",
@@ -209,6 +197,16 @@ cmp.setup({
   experimental = {
     ghost_text = true,
   },
+})
+
+-- nvim-treesitter config
+require('nvim-treesitter').install { "lua", "vim", "vimdoc", "ruby", "diff", "javascript", "html", "css", "dockerfile", "fish", "python", "gitcommit", "gitignore", "go", "ssh_config", "markdown", "markdown_inline" }
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { '<filetype>' },
+	callback = function()
+		vim.treesitter.start()
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
 })
 
 local builtin = require('telescope.builtin')
